@@ -7,7 +7,7 @@
 	import type { Props } from './index.js';
 	import type { ConnectWalletModalStep } from './steps/types.js';
 	import { cn } from '$/utils.js';
-	import WalletSelector from './steps/wallet-selector.svelte';
+	import { WalletSelector } from './steps/wallet-selector/index.js';
 	import type { Action } from 'svelte/action';
 
 	type $$Props = Props;
@@ -51,13 +51,13 @@
 				<Button
 					variant="ghost"
 					size="auto"
-					class="twsv-absolute -twsv-left-2 twsv-text-muted-foreground twsv-top-0"
+					class="twsv-absolute -twsv-left-2 twsv-top-0 twsv-text-muted-foreground"
 					on:click={back}
 				>
 					<ChevronLeft />
 				</Button>
 			{/if}
-			<Dialog.Title class="twsv-text-xl twsv-w-fit">Sign in</Dialog.Title>
+			<Dialog.Title class="twsv-w-fit twsv-text-xl">Sign in</Dialog.Title>
 		</Dialog.Header>
 		<div
 			style="--height: {height ? `${height}px` : 'auto'}"
@@ -74,9 +74,9 @@
 					variant="link"
 					size="auto"
 					target="_blank"
-					class="twsv-mt-8 twsv-flex twsv-justify-center twsv-items-center twsv-text-muted-foreground twsv-gap-1 !twsv-no-underline hover:twsv-text-foreground focus-visible:twsv-text-foreground twsv-mx-auto twsv-w-fit"
+					class="twsv-mx-auto twsv-mt-8 twsv-flex twsv-w-fit twsv-items-center twsv-justify-center twsv-gap-1 twsv-text-muted-foreground !twsv-no-underline hover:twsv-text-foreground focus-visible:twsv-text-foreground"
 				>
-					<span class="twsv-text-sm twsv-leading-normal twsv-font-semibold">Powered by</span>
+					<span class="twsv-text-sm twsv-font-semibold twsv-leading-normal">Powered by</span>
 					<Thirdweb height={12} class="twsv-relative twsv-top-px" />
 				</Button>
 			</div>
