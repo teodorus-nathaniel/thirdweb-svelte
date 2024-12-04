@@ -23,7 +23,7 @@
 		{transition}
 		{transitionConfig}
 		class={cn(
-			'twsv-bg-background twsv-text-foreground twsv-fixed twsv-left-[50%] twsv-top-[50%] twsv-z-50 twsv-grid twsv-w-full twsv-max-w-md twsv-translate-x-[-50%] twsv-translate-y-[-50%] twsv-gap-6 twsv-border twsv-border-border twsv-p-6 twsv-shadow-lg sm:twsv-rounded-2xl md:twsv-w-full',
+			'twsv-bg-background twsv-text-foreground twsv-fixed twsv-left-[50%] twsv-top-[50%] twsv-z-50 twsv-grid twsv-w-full twsv-max-w-sm twsv-translate-x-[-50%] twsv-translate-y-[-50%] twsv-gap-6 twsv-border twsv-border-border twsv-p-6 twsv-shadow-lg sm:twsv-rounded-2xl md:twsv-w-full',
 			theme === 'dark' && 'dark',
 			className
 		)}
