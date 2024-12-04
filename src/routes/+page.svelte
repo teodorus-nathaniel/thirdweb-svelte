@@ -1,3 +1,9 @@
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+	import { ConnectWalletModal } from '$/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
+
+	let isOpen = false;
+</script>
+
+<Button on:click={() => (isOpen = !isOpen)}>asdfasdf</Button>
+<ConnectWalletModal open={isOpen} onOpenChange={(open) => (isOpen = open)} />
