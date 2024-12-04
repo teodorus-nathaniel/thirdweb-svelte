@@ -10,7 +10,7 @@ const buttonVariants = tv({
 			destructive:
 				'twsv-bg-destructive twsv-text-destructive-foreground hover:twsv-bg-destructive/90',
 			outline:
-				'twsv-border-input twsv-bg-background hover:twsv-bg-accent hover:twsv-text-accent-foreground twsv-border',
+				'twsv-border-input twsv-bg-background hover:twsv-border-accent hover:twsv-text-accent-foreground twsv-border',
 			secondary: 'twsv-bg-secondary twsv-text-secondary-foreground hover:twsv-bg-secondary/80',
 			ghost: 'hover:twsv-bg-accent hover:twsv-text-accent-foreground',
 			link: 'twsv-text-primary twsv-underline-offset-4 hover:twsv-underline'
@@ -19,7 +19,8 @@ const buttonVariants = tv({
 			default: 'twsv-h-10 twsv-px-4 twsv-py-2',
 			sm: 'twsv-h-9 twsv-rounded-md twsv-px-3',
 			lg: 'twsv-h-11 twsv-rounded-md twsv-px-8',
-			icon: 'twsv-h-10 twsv-w-10'
+			icon: 'twsv-h-10 twsv-w-10',
+			auto: 'twsv-h-auto twsv-w-auto'
 		}
 	},
 	defaultVariants: {

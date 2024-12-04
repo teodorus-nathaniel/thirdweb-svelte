@@ -25,7 +25,7 @@
 		--twsv-secondary: 240 4.8% 95.9%;
 		--twsv-secondary-foreground: 240 5.9% 10%;
 
-		--twsv-accent: 240 4.8% 95.9%;
+		--twsv-accent: 216 64% 47%;
 		--twsv-accent-foreground: 240 5.9% 10%;
 
 		--twsv-destructive: 0 72.2% 50.6%;
@@ -40,25 +40,25 @@
 		--twsv-background: 240 10% 3.9%;
 		--twsv-foreground: 0 0% 98%;
 
-		--twsv-muted: 240 3.7% 15.9%;
-		--twsv-muted-foreground: 240 5% 64.9%;
+		--twsv-muted: 227 10% 17%;
+		--twsv-muted-foreground: 251 4% 50%;
 
-		--twsv-popover: 240 10% 3.9%;
+		--twsv-popover: 210 14% 8%;
 		--twsv-popover-foreground: 0 0% 98%;
 
-		--twsv-card: 240 10% 3.9%;
+		--twsv-card: 210 14% 8%;
 		--twsv-card-foreground: 0 0% 98%;
 
-		--twsv-border: 240 3.7% 15.9%;
-		--twsv-input: 240 3.7% 15.9%;
+		--twsv-border: 227 10% 17%;
+		--twsv-input: 227 10% 17%;
 
 		--twsv-primary: 0 0% 98%;
 		--twsv-primary-foreground: 240 5.9% 10%;
 
-		--twsv-secondary: 240 3.7% 15.9%;
+		--twsv-secondary: 227 10% 17%;
 		--twsv-secondary-foreground: 0 0% 98%;
 
-		--twsv-accent: 240 3.7% 15.9%;
+		--twsv-accent: 216 64% 47%;
 		--twsv-accent-foreground: 0 0% 98%;
 
 		--twsv-destructive: 0 62.8% 30.6%;
