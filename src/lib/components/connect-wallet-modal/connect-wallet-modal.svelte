@@ -14,7 +14,7 @@
 		<Dialog.Header>
 			<Dialog.Title class="twsv-text-xl">Sign in</Dialog.Title>
 		</Dialog.Header>
-		<div class="twsv-flex twsv-items-center twsv-gap-2 twsv-mt-2">
+		<div class="twsv-flex twsv-items-center twsv-gap-3 twsv-mt-2">
 			<Button variant="outline" size="auto" class="twsv-p-3 twsv-flex-1">
 				<SocialIcon iconName="google" class="twsv-h-6 twsv-w-6" />
 			</Button>
