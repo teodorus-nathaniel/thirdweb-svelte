@@ -1,5 +1,9 @@
 <script lang="ts">
-	import Button from '$lib/components/ui/button/button.svelte';
+	import { ConnectWalletModal } from '$/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
+
+	let isOpen = false;
 </script>
 
-<Button>asdfasdf</Button>
+<Button on:click={() => (isOpen = !isOpen)}>asdfasdf</Button>
+<ConnectWalletModal open={isOpen} onOpenChange={(open) => (isOpen = open)} />

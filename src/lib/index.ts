@@ -1,1 +1,1 @@
-// Reexport your entry components here
+export * from './components/connect-wallet-modal/index.js';
