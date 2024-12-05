@@ -2,7 +2,7 @@
 	import type { ConnectWalletModalStepProps } from '../index.js';
 	import { getWalletInfoQuery } from '$/queries/wallets.js';
 	import { Spinner } from '$/components/ui/spinner/index.js';
-	import { getInstalledWalletProviders } from '../wallet-selector/index.js';
+	import { getInstalledWalletData, getInstalledWalletProviders } from '../wallet-selector/index.js';
 	import InjectedWalletConnect from './injected-wallet-connect.svelte';
 	import { isMobile } from '$/utils/platform.js';
 
@@ -21,7 +21,7 @@
 		<Spinner class="twsv-h-16 twsv-w-16" />
 	</div>
 {:else if !$walletInfoQuery.data}
-	{@const injectedProvider = getInstalledWalletProviders().find((w) => w.info.rdns === wallet.id)}
+	{@const injectedProvider = getInstalledWalletData(wallet.id)}
 	{#if injectedProvider}
 		<InjectedWalletConnect {wallet} />
 	{:else}

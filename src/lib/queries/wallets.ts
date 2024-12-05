@@ -5,7 +5,11 @@ export function getWalletInfoQuery(walletId: WalletId, config?: { enabled: boole
 	return createQuery({
 		...config,
 		queryKey: ['wallet-info', walletId],
-		queryFn: () => getWalletInfo(walletId)
+		queryFn: () => getWalletInfo(walletId, false),
+		retry: false,
+		refetchOnWindowFocus: false,
+		refetchOnMount: false,
+		enabled: !!walletId
 	});
 }
 
@@ -13,6 +17,10 @@ export function getWalletInfoImageQuery(walletId: WalletId, config?: { enabled: 
 	return createQuery({
 		...config,
 		queryKey: ['wallet-info-image', walletId],
-		queryFn: () => getWalletInfo(walletId, true)
+		queryFn: () => getWalletInfo(walletId, true),
+		retry: false,
+		refetchOnWindowFocus: false,
+		refetchOnMount: false,
+		enabled: !!walletId
 	});
 }
