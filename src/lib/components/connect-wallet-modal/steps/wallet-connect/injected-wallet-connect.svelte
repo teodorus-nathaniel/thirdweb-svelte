@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getWalletInfoQuery } from '$/queries/wallets.js';
-	import type { Wallet } from 'thirdweb/wallets';
+	import type { Account, Wallet } from 'thirdweb/wallets';
 	import WalletLogoSpinner from './wallet-logo-spinner.svelte';
 	import { getInstalledWalletData } from '../wallet-selector/index.js';
 	import type { Chain } from 'thirdweb';
@@ -11,6 +11,7 @@
 
 	export let wallet: Wallet;
 	export let chain: Chain | undefined = undefined;
+	export let onFinishConnect: (account: Account) => void;
 
 	const context = getThirdwebSvelteContext();
 
@@ -21,13 +22,12 @@
 			connectPrompted = true;
 			errorConnecting = false;
 			await wait(1000);
-			await wallet.connect({
+			const account = await wallet.connect({
 				client: context.client,
 				chain
 			});
 
-			// TODO: done handling
-			// done();
+			onFinishConnect(account);
 		} catch (e) {
 			errorConnecting = true;
 			console.error(e);
