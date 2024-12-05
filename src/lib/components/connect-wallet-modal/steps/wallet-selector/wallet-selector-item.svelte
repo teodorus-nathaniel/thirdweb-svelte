@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { type Wallet } from 'thirdweb/wallets';
-	import { getInstalledWalletProviders } from './index.js';
+	import { getInstalledWalletData, getInstalledWalletProviders } from './index.js';
 	import type { ConnectWalletModalStepProps } from '../index.js';
 	import Button from '$/components/ui/button/button.svelte';
 	import Skeleton from '$/components/ui/skeleton/skeleton.svelte';
@@ -10,7 +10,7 @@
 	export let wallet: Wallet;
 	export let setStep: ConnectWalletModalStepProps<'wallet-selector'>['setStep'];
 
-	$: installedWalletInfo = getInstalledWalletProviders().find((x) => x.info.rdns === wallet.id);
+	$: installedWalletInfo = getInstalledWalletData(wallet.id);
 	$: walletInfoQuery = getWalletInfoQuery(wallet.id);
 
 	$: walletName = installedWalletInfo?.info.name || $walletInfoQuery.data?.name;
