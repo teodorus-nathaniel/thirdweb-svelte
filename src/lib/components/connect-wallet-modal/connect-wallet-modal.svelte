@@ -12,9 +12,10 @@
 
 	type $$Props = Props;
 	export let theme: $$Props['theme'] = 'dark';
+	export let open: $$Props['open'] = false;
 
 	let step: ConnectWalletModalStep = 'provider-selector';
-	const stepsHistory: ConnectWalletModalStep[] = [];
+	let stepsHistory: ConnectWalletModalStep[] = [];
 
 	const changeStep = (nextStep: ConnectWalletModalStep) => {
 		stepsHistory.push(step);
@@ -37,9 +38,15 @@
 	};
 
 	$: showBackButton = step !== 'provider-selector' && stepsHistory.length > 0;
+	$: {
+		if (open) {
+			step = 'provider-selector';
+			stepsHistory = [];
+		}
+	}
 </script>
 
-<Dialog.Root {...$$restProps}>
+<Dialog.Root {...$$restProps} {open}>
 	<Dialog.Content {theme} class={cn('twsv-pb-4')}>
 		<Dialog.Header
 			class={cn(
