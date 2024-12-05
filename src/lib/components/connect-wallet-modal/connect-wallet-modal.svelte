@@ -12,19 +12,20 @@
 	import { cn } from '$/utils.js';
 	import type { Action } from 'svelte/action';
 	import { WalletConnect } from './steps/wallet-connect/index.js';
+	import type { Account } from 'thirdweb/wallets';
+	import { getThirdwebSvelteContext } from '../thirdweb-svelte-provider/context.js';
 
 	type $$Props = ConnectWalletModalProps;
 	export let chain: $$Props['chain'] = undefined;
 	export let theme: $$Props['theme'] = 'dark';
 	export let open: $$Props['open'] = false;
 
+	const context = getThirdwebSvelteContext();
+
 	let step: ConnectWalletModalStep = 'provider-selector';
 	let additionalProps: any = undefined;
 
-	const changeStep = (
-		nextStep: ConnectWalletModalStep,
-		nextAdditionalProps: unknown = undefined
-	) => {
+	const setStep = (nextStep: ConnectWalletModalStep, nextAdditionalProps: unknown = undefined) => {
 		additionalProps = nextAdditionalProps;
 		step = nextStep;
 	};
@@ -42,6 +43,11 @@
 		return {
 			destroy: () => resizeObserver.disconnect()
 		};
+	};
+
+	const onFinishConnect = (account: Account) => {
+		context.account.set(account);
+		closeModal();
 	};
 
 	$: showBackButton = step !== 'provider-selector';
@@ -66,7 +72,7 @@
 					variant="ghost"
 					size="auto"
 					class="twsv-absolute -twsv-left-2 twsv-top-0 twsv-text-muted-foreground"
-					on:click={() => changeStep('provider-selector')}
+					on:click={() => setStep('provider-selector')}
 				>
 					<ChevronLeft />
 				</Button>
@@ -79,15 +85,15 @@
 		>
 			<div class="twsv-flex twsv-flex-col" use:heightObserver>
 				{#if step === 'provider-selector'}
-					<ProviderSelector setStep={changeStep} {chain} {additionalProps} {closeModal} />
+					<ProviderSelector {setStep} {onFinishConnect} {chain} {additionalProps} />
 				{:else if step === 'wallet-selector'}
-					<WalletSelector setStep={changeStep} {chain} {additionalProps} {closeModal} />
+					<WalletSelector {setStep} {onFinishConnect} {chain} {additionalProps} />
 				{:else if step === 'oauth-loading'}
-					<OauthLoading setStep={changeStep} {chain} {additionalProps} {closeModal} />
+					<OauthLoading {setStep} {onFinishConnect} {chain} {additionalProps} />
 				{:else if step === 'oauth-error'}
-					<OauthError setStep={changeStep} {chain} {additionalProps} {closeModal} />
+					<OauthError {setStep} {onFinishConnect} {chain} {additionalProps} />
 				{:else if step === 'wallet-connect'}
-					<WalletConnect setStep={changeStep} {chain} {additionalProps} {closeModal} />
+					<WalletConnect {setStep} {onFinishConnect} {chain} {additionalProps} />
 				{/if}
 				{#if !hideFooter}
 					<Button

@@ -25,10 +25,10 @@ type ConnectWalletModalStepsAdditionalProps = {
 
 export type ConnectWalletModalStepProps<CurrentStep extends ConnectWalletModalStep> = {
 	chain: Chain | undefined;
+	onFinishConnect: (account: Account) => void;
 	setStep: <Step extends ConnectWalletModalStep>(
 		step: Step,
 		additionalProps: ConnectWalletModalStepsAdditionalProps[Step]
 	) => void;
-	closeModal: () => void;
 	additionalProps: ConnectWalletModalStepsAdditionalProps[CurrentStep];
 };

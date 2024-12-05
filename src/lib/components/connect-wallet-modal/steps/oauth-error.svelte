@@ -7,7 +7,7 @@
 
 	type $$Props = ConnectWalletModalStepProps<'oauth-error'>;
 	export let additionalProps: $$Props['additionalProps'];
-	export let closeModal: $$Props['closeModal'];
+	export let onFinishConnect: $$Props['onFinishConnect'];
 
 	const context = getThirdwebSvelteContext();
 
@@ -16,8 +16,7 @@
 		isRetrying = true;
 		try {
 			const account = await additionalProps.retry();
-			context.account.set(account);
-			closeModal();
+			onFinishConnect(account);
 		} catch (err) {
 			additionalProps.message = (err as Error)?.message || 'An error occurred';
 		} finally {

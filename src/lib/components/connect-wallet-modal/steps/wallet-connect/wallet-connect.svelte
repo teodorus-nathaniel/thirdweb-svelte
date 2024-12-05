@@ -7,24 +7,17 @@
 	import { isMobile } from '$/utils/platform.js';
 	import type { Chain } from 'thirdweb';
 	import type { Account } from 'thirdweb/wallets';
-	import { ContextMenu } from 'bits-ui';
-	import { getThirdwebSvelteContext } from '$/components/thirdweb-svelte-provider/context.js';
 
 	type $$Props = ConnectWalletModalStepProps<'wallet-connect'>;
 	export let additionalProps: $$Props['additionalProps'];
 	export let chain: Chain | undefined;
-
-	const context = getThirdwebSvelteContext();
+	export let onFinishConnect: (account: Account) => void;
 
 	$: wallet = additionalProps.wallet;
 	$: walletInfoQuery = getWalletInfoQuery(wallet.id);
 
 	$: preferDeepLink = (wallet.getConfig() as { preferDeepLink: boolean | undefined } | undefined)
 		?.preferDeepLink;
-
-	const onFinishConnect = (account: Account) => {
-		context.account.set(account);
-	};
 </script>
 
 {#if $walletInfoQuery.isLoading}

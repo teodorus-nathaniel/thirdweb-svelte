@@ -9,12 +9,12 @@
 	type $$Props = ConnectWalletModalStepProps<'provider-selector'>;
 	export let chain: $$Props['chain'];
 	export let setStep: $$Props['setStep'];
-	export let closeModal: $$Props['closeModal'];
+	export let onFinishConnect: $$Props['onFinishConnect'];
 </script>
 
 <div class="twsv-flex twsv-items-center twsv-gap-3">
 	{#each SUPPORTED_SOCIAL_PROVIDERS as provider}
-		<SocialProviderButton {chain} {setStep} {provider} {closeModal} />
+		<SocialProviderButton {chain} {setStep} {provider} {onFinishConnect} />
 	{/each}
 </div>
 <div class="twsv-relative">
