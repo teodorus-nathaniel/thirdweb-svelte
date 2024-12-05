@@ -3,7 +3,7 @@
 		getThirdwebSvelteContext,
 		setThirdwebSvelteContext
 	} from '$/components/thirdweb-svelte-provider/context.js';
-	import { Button } from '$lib/components/ui/button/index.js';
+	import { Button } from '$/components/ui/button/index.js';
 	import { SocialIcon } from '../../components/social-icon/index.js';
 	import { type Chain, type ThirdwebClient } from 'thirdweb';
 	import type { ConnectWalletModalStepProps } from '../index.js';

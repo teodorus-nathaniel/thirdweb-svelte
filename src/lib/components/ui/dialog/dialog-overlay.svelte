@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Dialog as DialogPrimitive } from 'bits-ui';
 	import { fade } from 'svelte/transition';
-	import { cn } from '$lib/utils.js';
+	import { cn } from '$/utils.js';
 
 	type $$Props = DialogPrimitive.OverlayProps;
 
@@ -17,7 +17,7 @@
 	{transition}
 	{transitionConfig}
 	class={cn(
-		'twsv-bg-background/80 twsv-fixed twsv-inset-0 twsv-z-50 twsv-backdrop-blur-sm',
+		'twsv-fixed twsv-inset-0 twsv-z-50 twsv-bg-background/80 twsv-backdrop-blur-sm',
 		className
 	)}
 	{...$$restProps}

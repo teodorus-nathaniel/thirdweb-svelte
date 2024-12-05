@@ -1,9 +1,8 @@
 <script lang="ts">
-	import * as Dialog from '$lib/components/ui/dialog/index.js';
+	import * as Dialog from '$/components/ui/dialog/index.js';
 	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
 	import { Button } from '../ui/button/index.js';
 	import Thirdweb from './components/thirdweb.svelte';
-	import { type ComponentType } from 'svelte';
 	import type { Props } from './index.js';
 	import { type ConnectWalletModalStep } from './steps/index.js';
 	import { ProviderSelector } from './steps/provider-selector/index.js';

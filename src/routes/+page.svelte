@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { ConnectWalletModal } from '$lib/index.js';
-	import { Button } from '$lib/components/ui/button/index.js';
+	import { ConnectWalletModal } from '$/index.js';
+	import { Button } from '$/components/ui/button/index.js';
 
 	let isOpen = true;
 </script>

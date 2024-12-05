@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button/index.js';
-	import { Separator } from '$lib/components/ui/separator/index.js';
+	import { Button } from '$/components/ui/button/index.js';
+	import { Separator } from '$/components/ui/separator/index.js';
 	import { SocialIcon } from '../../components/social-icon/index.js';
 	import type { ConnectWalletModalStepProps } from '../index.js';
 	import { SUPPORTED_SOCIAL_PROVIDERS } from './index.js';

@@ -2,7 +2,7 @@
 	import { setThirdwebSvelteContext } from '$/components/thirdweb-svelte-provider/context.js';
 	import { Button } from '$/components/ui/button/index.js';
 	import { cn } from '$/utils.js';
-	import { Spinner } from '$lib/components/ui/spinner/index.js';
+	import { Spinner } from '$/components/ui/spinner/index.js';
 	import type { ConnectWalletModalStepProps } from './index.js';
 
 	type $$Props = ConnectWalletModalStepProps<'oauth-error'>;
