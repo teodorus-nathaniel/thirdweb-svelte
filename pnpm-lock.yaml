@@ -79,6 +79,9 @@ devDependencies:
   svelte-check:
     specifier: ^4.0.0
     version: 4.1.1(svelte@4.2.19)(typescript@5.7.2)
+  svelte-legos:
+    specifier: ^0.2.5
+    version: 0.2.5(svelte@4.2.19)
   tailwind-merge:
     specifier: ^2.5.5
     version: 2.5.5
@@ -97,6 +100,9 @@ devDependencies:
   typescript-eslint:
     specifier: ^8.0.0
     version: 8.17.0(eslint@9.16.0)(typescript@5.7.2)
+  vaul-svelte:
+    specifier: ^0.3.2
+    version: 0.3.2(svelte@4.2.19)
   vite:
     specifier: ^5.0.0
     version: 5.4.11
@@ -2696,6 +2702,10 @@ packages:
     resolution: {integrity: sha512-Y7deg0Aergpa24M3qLC5xjNklnKnhsmSyR/V89dLZ1n0ucJIFNs7PgR2Yfa/Zf6W79SbBicgtGxZr2juHkEUIA==}
     dev: true
 
+  /canvas-confetti@1.9.3:
+    resolution: {integrity: sha512-rFfTURMvmVEX1gyXFgn5QMn81bYk70qa0HLzcIOSVEyl57n6o9ItHeBtUSWdvKAPY0xlvBHno4/v3QPrT83q9g==}
+    dev: true
+
   /chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
@@ -4511,6 +4521,15 @@ packages:
     hasBin: true
     dev: true
 
+  /prism-svelte@0.5.0:
+    resolution: {integrity: sha512-db91Bf3pRGKDPz1lAqLFSJXeW13mulUJxhycysFpfXV5MIK7RgWWK2E5aPAa71s8TCzQUXxF5JOV42/iOs6QkA==}
+    dev: true
+
+  /prismjs@1.29.0:
+    resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
+    engines: {node: '>=6'}
+    dev: true
+
   /process-warning@1.0.0:
     resolution: {integrity: sha512-du4wfLyj4yCZq1VupnVSZmRsPJsNuxoDQFdCFHLaYiEbFBD7QE0a+I4D7hOxrVnh78QE/YipFAj9lXHiXocV+Q==}
     dev: false
@@ -4946,6 +4965,17 @@ packages:
     peerDependencies:
       svelte: ^3.19.0 || ^4.0.0
     dependencies:
+      svelte: 4.2.19
+    dev: true
+
+  /svelte-legos@0.2.5(svelte@4.2.19):
+    resolution: {integrity: sha512-r4HbLYripCLECgraqJMvsykW/8FaPBd1hLkt3ejJzJRfhhOnCgGTo6lJT27qrestDFbiIASQV3xOnjRr/D6cGw==}
+    peerDependencies:
+      svelte: ^4.0.0
+    dependencies:
+      canvas-confetti: 1.9.3
+      prism-svelte: 0.5.0
+      prismjs: 1.29.0
       svelte: 4.2.19
     dev: true
 
@@ -5407,6 +5437,15 @@ packages:
       react: 18.3.1
       use-sync-external-store: 1.2.0(react@18.3.1)
     dev: false
+
+  /vaul-svelte@0.3.2(svelte@4.2.19):
+    resolution: {integrity: sha512-X4OGWttSTVUl417qGDsSFgOvIx24DoiMRY/jaP9z0v9FL8LQQJ0RQ1ZM0QpdyQPRlNd24ewjNQHh5EgYDtfNpw==}
+    peerDependencies:
+      svelte: ^4.0.0 || ^5.0.0-next.1
+    dependencies:
+      bits-ui: 0.21.16(svelte@4.2.19)
+      svelte: 4.2.19
+    dev: true
 
   /viem@2.21.53(typescript@5.7.2):
     resolution: {integrity: sha512-0pY8clBacAwzc59iV1vY4a6U4xvRlA5tAuhClJCKvqA6rXJzmNMMvxQ0EG79lkHr7WtBEruXz8nAmONXwnq4EQ==}

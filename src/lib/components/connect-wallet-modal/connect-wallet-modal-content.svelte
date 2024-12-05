@@ -1,0 +1,72 @@
+<script lang="ts">
+	import type { Action } from 'svelte/action';
+	import type { ConnectWalletModalStep, ConnectWalletModalStepProps } from './steps/index.js';
+	import Button from '../ui/button/button.svelte';
+	import { getThirdwebSvelteContext } from '../thirdweb-svelte-provider/context.js';
+	import type { Account } from 'thirdweb/wallets';
+	import type { Chain } from 'thirdweb';
+	import { ProviderSelector } from './steps/provider-selector/index.js';
+	import { WalletSelector } from './steps/wallet-selector/index.js';
+	import OauthLoading from './steps/oauth-loading.svelte';
+	import OauthError from './steps/oauth-error.svelte';
+	import { WalletConnect } from './steps/wallet-connect/index.js';
+	import Thirdweb from './components/thirdweb.svelte';
+
+	export let step: ConnectWalletModalStep;
+	export let setStep: ConnectWalletModalStepProps<'provider-selector'>['setStep'];
+	export let closeModal: () => void;
+	export let chain: Chain | undefined;
+	export let additionalProps: any;
+
+	const context = getThirdwebSvelteContext();
+
+	const onFinishConnect = (account: Account) => {
+		context.account.set(account);
+		closeModal();
+	};
+
+	let height = 0;
+	const heightObserver: Action = (node) => {
+		const resizeObserver = new ResizeObserver(() => {
+			height = node.scrollHeight;
+		});
+		resizeObserver.observe(node);
+
+		return {
+			destroy: () => resizeObserver.disconnect()
+		};
+	};
+
+	$: hideFooter = step === 'oauth-error' || step === 'oauth-loading' || step === 'wallet-connect';
+</script>
+
+<div
+	style="--height: {height ? `${height}px` : 'auto'}"
+	class="twsv-h-[var(--height)] twsv-transition-[height] twsv-duration-[210ms] twsv-ease-[cubic-bezier(0.175,_0.885,_0.32,_1.1)]"
+>
+	<div class="twsv-flex twsv-flex-col" use:heightObserver>
+		{#if step === 'provider-selector'}
+			<ProviderSelector {setStep} {onFinishConnect} {chain} {additionalProps} />
+		{:else if step === 'wallet-selector'}
+			<WalletSelector {setStep} {onFinishConnect} {chain} {additionalProps} />
+		{:else if step === 'oauth-loading'}
+			<OauthLoading {setStep} {onFinishConnect} {chain} {additionalProps} />
+		{:else if step === 'oauth-error'}
+			<OauthError {setStep} {onFinishConnect} {chain} {additionalProps} />
+		{:else if step === 'wallet-connect'}
+			<WalletConnect {setStep} {onFinishConnect} {chain} {additionalProps} />
+		{/if}
+		{#if !hideFooter}
+			<Button
+				href="https://thirdweb.com/connect?utm_source=cw_text"
+				variant="link"
+				size="auto"
+				target="_blank"
+				class="twsv-mx-auto twsv-mt-8 twsv-flex twsv-w-fit twsv-items-center twsv-justify-center twsv-gap-1 twsv-text-muted-foreground !twsv-no-underline hover:twsv-text-foreground focus-visible:twsv-text-foreground"
+			>
+				<span class="twsv-text-sm twsv-font-semibold twsv-leading-normal">Powered by</span>
+				<Thirdweb height={12} class="twsv-relative twsv-top-px" />
+			</Button>
+		{/if}
+	</div>
+</div>
