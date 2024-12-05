@@ -12,7 +12,7 @@
 	{...$$restProps}
 >
 	<circle
-		class="twsv-animate-dash-animation twsv-stroke-accent"
+		class="twsv-animate-dash-animation twsv-stroke-accent-foreground"
 		cx="25"
 		cy="25"
 		r="20"

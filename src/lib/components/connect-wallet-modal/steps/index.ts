@@ -1,3 +1,4 @@
+import type { Chain } from 'thirdweb';
 import type { Account, Wallet } from 'thirdweb/wallets';
 
 export const connectWalletModalSteps = [
@@ -23,6 +24,7 @@ type ConnectWalletModalStepsAdditionalProps = {
 };
 
 export type ConnectWalletModalStepProps<CurrentStep extends ConnectWalletModalStep> = {
+	chain: Chain | undefined;
 	setStep: <Step extends ConnectWalletModalStep>(
 		step: Step,
 		additionalProps: ConnectWalletModalStepsAdditionalProps[Step]

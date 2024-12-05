@@ -14,6 +14,7 @@
 	import { WalletConnect } from './steps/wallet-connect/index.js';
 
 	type $$Props = ConnectWalletModalProps;
+	export let chain: $$Props['chain'] = undefined;
 	export let theme: $$Props['theme'] = 'dark';
 	export let open: $$Props['open'] = false;
 
@@ -78,15 +79,15 @@
 		>
 			<div class="twsv-flex twsv-flex-col" use:heightObserver>
 				{#if step === 'provider-selector'}
-					<ProviderSelector setStep={changeStep} {additionalProps} {closeModal} />
+					<ProviderSelector setStep={changeStep} {chain} {additionalProps} {closeModal} />
 				{:else if step === 'wallet-selector'}
-					<WalletSelector setStep={changeStep} {additionalProps} {closeModal} />
+					<WalletSelector setStep={changeStep} {chain} {additionalProps} {closeModal} />
 				{:else if step === 'oauth-loading'}
-					<OauthLoading setStep={changeStep} {additionalProps} {closeModal} />
+					<OauthLoading setStep={changeStep} {chain} {additionalProps} {closeModal} />
 				{:else if step === 'oauth-error'}
-					<OauthError setStep={changeStep} {additionalProps} {closeModal} />
+					<OauthError setStep={changeStep} {chain} {additionalProps} {closeModal} />
 				{:else if step === 'wallet-connect'}
-					<WalletConnect setStep={changeStep} {additionalProps} {closeModal} />
+					<WalletConnect setStep={changeStep} {chain} {additionalProps} {closeModal} />
 				{/if}
 				{#if !hideFooter}
 					<Button

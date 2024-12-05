@@ -5,9 +5,11 @@
 	import { getInstalledWalletData, getInstalledWalletProviders } from '../wallet-selector/index.js';
 	import InjectedWalletConnect from './injected-wallet-connect.svelte';
 	import { isMobile } from '$/utils/platform.js';
+	import type { Chain } from 'thirdweb';
 
 	type $$Props = ConnectWalletModalStepProps<'wallet-connect'>;
 	export let additionalProps: $$Props['additionalProps'];
+	export let chain: Chain | undefined;
 
 	$: wallet = additionalProps.wallet;
 	$: walletInfoQuery = getWalletInfoQuery(wallet.id);
@@ -23,7 +25,7 @@
 {:else if !$walletInfoQuery.data}
 	{@const injectedProvider = getInstalledWalletData(wallet.id)}
 	{#if injectedProvider}
-		<InjectedWalletConnect {wallet} />
+		<InjectedWalletConnect {wallet} {chain} />
 	{:else}
 		<!-- TODO: unsupported screen -->
 	{/if}
@@ -32,7 +34,7 @@
 	{#if $walletInfoQuery.data.deepLink && !isInstalled && preferDeepLink && isMobile()}
 		<!-- TODO: DeepLinkConnectUI -->
 	{:else if $walletInfoQuery.data.rdns && isInstalled}
-		<InjectedWalletConnect {wallet} />
+		<InjectedWalletConnect {wallet} {chain} />
 	{:else if $walletInfoQuery.data.mobile.native && $walletInfoQuery.data.mobile.universal}
 		<!-- TODO: WalletConnectConnection -->
 	{:else if wallet.id === 'walletConnect'}

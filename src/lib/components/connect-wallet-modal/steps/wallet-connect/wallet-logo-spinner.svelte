@@ -18,7 +18,11 @@
 <div class={cn('logo-container', className)} data-error={error}>
 	<div data-container class="twsv-relative twsv-flex twsv-items-center twsv-justify-center">
 		<div data-img-container>
-			<svg viewBox="0 0 110 110" class={cn(error ? 'hidden' : 'block')} role="presentation">
+			<svg
+				viewBox="0 0 110 110"
+				class={cn(error ? 'twsv-hidden' : 'twsv-block')}
+				role="presentation"
+			>
 				<rect
 					x="2"
 					y="2"
@@ -67,7 +71,7 @@
 		position: absolute;
 		inset: 0;
 		animation: pulse-animation 1.5s ease infinite;
-		border-radius: 16px;
+		border-radius: 14px;
 		z-index: -1;
 	}
 
@@ -81,7 +85,7 @@
 	}
 
 	.logo-container rect {
-		@apply twsv-stroke-accent;
+		@apply twsv-stroke-accent-foreground;
 		animation: dash-rotate-animation 1.2s linear infinite;
 	}
 
