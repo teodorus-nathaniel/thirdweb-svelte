@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { setThirdwebSvelteContext } from '$/components/thirdweb-svelte-provider/context.js';
 	import { Button } from '$/components/ui/button/index.js';
 	import { cn } from '$/utils.js';
 	import { Spinner } from '$lib/components/ui/spinner/index.js';
@@ -13,6 +14,7 @@
 		isRetrying = true;
 		try {
 			const account = await additionalProps.retry();
+			setThirdwebSvelteContext({ account });
 			closeModal();
 		} catch (err) {
 			additionalProps.message = (err as Error)?.message || 'An error occurred';

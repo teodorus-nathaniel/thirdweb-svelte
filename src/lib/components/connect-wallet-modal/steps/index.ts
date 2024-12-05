@@ -1,3 +1,5 @@
+import type { Account } from 'thirdweb/wallets';
+
 export const connectWalletModalSteps = [
 	'provider-selector',
 	'wallet-selector',
@@ -12,7 +14,7 @@ type ConnectWalletModalStepsAdditionalProps = {
 	'oauth-loading': undefined;
 	'oauth-error': {
 		message: string;
-		retry: () => Promise<void>;
+		retry: () => Promise<Account>;
 	};
 };
 

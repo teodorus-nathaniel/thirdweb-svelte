@@ -1,5 +1,8 @@
 <script lang="ts">
-	import { getThirdwebSvelteContext } from '$/components/thirdweb-svelte-provider/context.js';
+	import {
+		getThirdwebSvelteContext,
+		setThirdwebSvelteContext
+	} from '$/components/thirdweb-svelte-provider/context.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { SocialIcon } from '../../components/social-icon/index.js';
 	import { type Chain, type ThirdwebClient } from 'thirdweb';
@@ -26,6 +29,7 @@
 				chain,
 				strategy: provider
 			});
+			setThirdwebSvelteContext({ account: acc });
 			closeModal();
 		} catch (err) {
 			const message = (err as Error)?.message || 'An error occurred';
@@ -37,6 +41,7 @@
 						chain,
 						strategy: provider
 					});
+					return acc;
 				}
 			});
 		}

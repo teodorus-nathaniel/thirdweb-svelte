@@ -1,8 +1,12 @@
 import { getContext, setContext } from 'svelte';
 import type { ThirdwebClient } from 'thirdweb';
-import type { Wallet } from 'thirdweb/wallets';
+import type { Account, Wallet } from 'thirdweb/wallets';
 
-type ThirdwebSvelteContext = { wallet: Wallet; client: ThirdwebClient } | null;
+type ThirdwebSvelteContext = {
+	wallet: Wallet;
+	client: ThirdwebClient;
+	account: Account | null;
+} | null;
 const getThirdwebSvelteContext = () => getContext<ThirdwebSvelteContext>('providerContext');
 const setThirdwebSvelteContext = (wallet: Partial<ThirdwebSvelteContext>) => {
 	const current = getThirdwebSvelteContext();

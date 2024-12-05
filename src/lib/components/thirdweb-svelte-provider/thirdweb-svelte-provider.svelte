@@ -10,7 +10,7 @@
 		clientId: clientId
 	});
 	const wallet = inAppWallet();
-	setThirdwebSvelteContext({ wallet, client });
+	setThirdwebSvelteContext({ wallet, client, account: null });
 
 	const queryClient = new QueryClient();
 </script>
