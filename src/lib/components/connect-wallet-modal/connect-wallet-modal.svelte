@@ -11,6 +11,7 @@
 	import OauthError from './steps/oauth-error.svelte';
 	import { cn } from '$/utils.js';
 	import type { Action } from 'svelte/action';
+	import { WalletConnect } from './steps/wallet-connect/index.js';
 
 	type $$Props = ConnectWalletModalProps;
 	export let theme: $$Props['theme'] = 'dark';
@@ -84,8 +85,8 @@
 					<OauthLoading setStep={changeStep} {additionalProps} {closeModal} />
 				{:else if step === 'oauth-error'}
 					<OauthError setStep={changeStep} {additionalProps} {closeModal} />
-				{:else}
-					<p>Unknown step: {step}</p>
+				{:else if step === 'wallet-connect'}
+					<WalletConnect setStep={changeStep} {additionalProps} {closeModal} />
 				{/if}
 				{#if !hideFooter}
 					<Button
