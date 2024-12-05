@@ -2,17 +2,19 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Separator } from '$lib/components/ui/separator/index.js';
 	import { SocialIcon } from '../../components/social-icon/index.js';
-	import type { ConnectWalletModalStepProps } from '../types.js';
+	import type { ConnectWalletModalStepProps } from '../index.js';
+	import { SUPPORTED_SOCIAL_PROVIDERS } from './index.js';
 	import SocialProviderButton from './social-provider-button.svelte';
 
-	type $$Props = ConnectWalletModalStepProps;
+	type $$Props = ConnectWalletModalStepProps<'provider-selector'>;
 	export let setStep: $$Props['setStep'];
+	export let closeModal: $$Props['closeModal'];
 </script>
 
 <div class="twsv-flex twsv-items-center twsv-gap-3">
-	<SocialProviderButton strategy="google" />
-	<SocialProviderButton strategy="apple" />
-	<SocialProviderButton strategy="x" />
+	{#each SUPPORTED_SOCIAL_PROVIDERS as provider}
+		<SocialProviderButton {setStep} {provider} {closeModal} />
+	{/each}
 </div>
 <div class="twsv-relative">
 	<Separator orientation="horizontal" class="twsv-relative twsv-my-6" />
@@ -24,7 +26,7 @@
 <Button
 	class="twsv-justify-start twsv-gap-3"
 	variant="outline"
-	on:click={() => setStep('wallet-selector')}
+	on:click={() => setStep('wallet-selector', undefined)}
 >
 	<SocialIcon iconName="wallet" class="twsv-h-5  twsv-w-5" />
 	<span class="twsv-font-medium">Connect a Wallet</span>

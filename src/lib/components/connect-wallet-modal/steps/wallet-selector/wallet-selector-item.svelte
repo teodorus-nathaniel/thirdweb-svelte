@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { getWalletInfo, type Wallet } from 'thirdweb/wallets';
 	import { getInstalledWalletProviders } from './index.js';
-	import type { ConnectWalletModalStep } from '../types.js';
+	import type { ConnectWalletModalStep, ConnectWalletModalStepProps } from '../index.js';
 	import Button from '$/components/ui/button/button.svelte';
 	import { createQuery } from '@tanstack/svelte-query';
 	import Skeleton from '$/components/ui/skeleton/skeleton.svelte';
 
 	export let wallet: Wallet;
-	export let setStep: (step: ConnectWalletModalStep) => void;
+	export let setStep: ConnectWalletModalStepProps<'wallet-selector'>['setStep'];
 
 	$: installedWalletInfo = getInstalledWalletProviders().find((x) => x.info.rdns === wallet.id);
 	$: installedWalletImage = installedWalletInfo?.info.icon;
