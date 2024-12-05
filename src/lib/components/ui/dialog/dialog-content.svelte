@@ -6,6 +6,7 @@
 
 	type $$Props = DialogPrimitive.ContentProps & {
 		theme?: 'light' | 'dark';
+		onAnimationEnd?: (event: AnimationEvent) => void;
 	};
 
 	let className: $$Props['class'] = undefined;
@@ -14,6 +15,7 @@
 	export let transitionConfig: $$Props['transitionConfig'] = {
 		duration: 200
 	};
+	export let onAnimationEnd: $$Props['onAnimationEnd'] = undefined;
 	export { className as class };
 </script>
 
@@ -23,18 +25,19 @@
 		{transition}
 		{transitionConfig}
 		class={cn(
-			'twsv-bg-background twsv-text-foreground twsv-fixed twsv-left-[50%] twsv-top-[50%] twsv-z-50 twsv-grid twsv-w-full twsv-max-w-lg twsv-translate-x-[-50%] twsv-translate-y-[-50%] twsv-gap-4 twsv-border twsv-border-border twsv-p-6 twsv-shadow-lg sm:twsv-rounded-lg md:twsv-w-full',
-			theme === 'dark' && 'dark',
-			className
+			'twsv-bg-background twsv-text-foreground twsv-fixed twsv-left-[50%] twsv-top-[50%] twsv-z-50 twsv-w-full twsv-max-w-sm twsv-translate-x-[-50%] twsv-translate-y-[-50%] twsv-border twsv-border-border twsv-shadow-lg sm:twsv-rounded-2xl md:twsv-w-full',
+			theme === 'dark' && 'dark'
 		)}
 		{...$$restProps}
 	>
-		<slot />
-		<DialogPrimitive.Close
-			class="twsv-ring-offset-background focus:twsv-ring-ring data-[state=open]:twsv-bg-accent data-[state=open]:twsv-text-muted-foreground twsv-absolute twsv-right-4 twsv-top-4 twsv-rounded-sm twsv-opacity-70 twsv-transition-opacity hover:twsv-opacity-100 focus:twsv-outline-none focus:twsv-ring-2 focus:twsv-ring-offset-2 disabled:twsv-pointer-events-none"
-		>
-			<X class="twsv-h-4 twsv-w-4" />
-			<span class="twsv-sr-only">Close</span>
-		</DialogPrimitive.Close>
+		<div on:animationend={onAnimationEnd} class={cn('twsv-grid twsv-gap-6 twsv-p-6', className)}>
+			<slot />
+			<DialogPrimitive.Close
+				class="twsv-ring-offset-background focus:twsv-ring-ring data-[state=open]:twsv-bg-accent data-[state=open]:twsv-text-muted-foreground twsv-absolute twsv-right-6 twsv-top-6 twsv-rounded-md twsv-opacity-70 twsv-transition-opacity hover:twsv-opacity-100 hover:twsv-bg-secondary focus:twsv-outline-none focus:twsv-ring-2 focus:twsv-bg-secondary focus:twsv-ring-offset-2 disabled:twsv-pointer-events-none"
+			>
+				<X class="twsv-h-6 twsv-w-6" />
+				<span class="twsv-sr-only">Close</span>
+			</DialogPrimitive.Close>
+		</div>
 	</DialogPrimitive.Content>
 </Dialog.Portal>

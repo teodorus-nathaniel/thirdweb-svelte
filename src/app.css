@@ -4,66 +4,66 @@
 
 @layer base {
 	:root {
-		--background: 0 0% 100%;
-		--foreground: 240 10% 3.9%;
+		--twsv-background: 0 0% 100%;
+		--twsv-foreground: 240 10% 3.9%;
 
-		--muted: 240 4.8% 95.9%;
-		--muted-foreground: 240 3.8% 46.1%;
+		--twsv-muted: 240 4.8% 95.9%;
+		--twsv-muted-foreground: 240 3.8% 46.1%;
 
-		--popover: 0 0% 100%;
-		--popover-foreground: 240 10% 3.9%;
+		--twsv-popover: 0 0% 100%;
+		--twsv-popover-foreground: 240 10% 3.9%;
 
-		--card: 0 0% 100%;
-		--card-foreground: 240 10% 3.9%;
+		--twsv-card: 0 0% 100%;
+		--twsv-card-foreground: 240 10% 3.9%;
 
-		--border: 240 5.9% 90%;
-		--input: 240 5.9% 90%;
+		--twsv-border: 240 5.9% 90%;
+		--twsv-input: 240 5.9% 90%;
 
-		--primary: 240 5.9% 10%;
-		--primary-foreground: 0 0% 98%;
+		--twsv-primary: 240 5.9% 10%;
+		--twsv-primary-foreground: 0 0% 98%;
 
-		--secondary: 240 4.8% 95.9%;
-		--secondary-foreground: 240 5.9% 10%;
+		--twsv-secondary: 240 4.8% 95.9%;
+		--twsv-secondary-foreground: 240 5.9% 10%;
 
-		--accent: 240 4.8% 95.9%;
-		--accent-foreground: 240 5.9% 10%;
+		--twsv-accent: 216 64% 47%;
+		--twsv-accent-foreground: 240 5.9% 10%;
 
-		--destructive: 0 72.2% 50.6%;
-		--destructive-foreground: 0 0% 98%;
+		--twsv-destructive: 0 72.2% 50.6%;
+		--twsv-destructive-foreground: 0 0% 98%;
 
-		--ring: 240 10% 3.9%;
+		--twsv-ring: 240 10% 3.9%;
 
-		--radius: 0.5rem;
+		--twsv-radius: 0.5rem;
 	}
 
 	.dark {
-		--background: 240 10% 3.9%;
-		--foreground: 0 0% 98%;
+		--twsv-background: 210 14% 8%;
+		--twsv-foreground: 0 0% 98%;
 
-		--muted: 240 3.7% 15.9%;
-		--muted-foreground: 240 5% 64.9%;
+		--twsv-muted: 227 10% 17%;
+		--twsv-muted-foreground: 251 4% 50%;
 
-		--popover: 240 10% 3.9%;
-		--popover-foreground: 0 0% 98%;
+		--twsv-popover: 210 14% 8%;
+		--twsv-popover-foreground: 0 0% 98%;
 
-		--card: 240 10% 3.9%;
-		--card-foreground: 0 0% 98%;
+		--twsv-card: 210 14% 8%;
+		--twsv-card-foreground: 0 0% 98%;
 
-		--border: 240 3.7% 15.9%;
-		--input: 240 3.7% 15.9%;
+		--twsv-border: 227 10% 17%;
+		--twsv-input: 227 10% 17%;
 
-		--primary: 0 0% 98%;
-		--primary-foreground: 240 5.9% 10%;
+		--twsv-primary: 0 0% 98%;
+		--twsv-primary-foreground: 240 5.9% 10%;
 
-		--secondary: 240 3.7% 15.9%;
-		--secondary-foreground: 0 0% 98%;
+		--twsv-secondary: 227 10% 17%;
+		--twsv-secondary-foreground: 0 0% 98%;
 
-		--accent: 240 3.7% 15.9%;
-		--accent-foreground: 0 0% 98%;
+		--twsv-accent: 216 64% 47%;
+		--twsv-accent-foreground: 0 0% 98%;
 
-		--destructive: 0 62.8% 30.6%;
-		--destructive-foreground: 0 0% 98%;
+		--twsv-destructive: 0 62.8% 30.6%;
+		--twsv-destructive-foreground: 0 0% 98%;
 
-		--ring: 240 4.9% 83.9%;
+		--twsv-ring: 240 4.9% 83.9%;
 	}
 }
