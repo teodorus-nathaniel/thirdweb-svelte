@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {
-		getThirdwebSvelteContext,
-		setThirdwebSvelteContext
+		connectAccount,
+		getThirdwebSvelteContext
 	} from '$/components/thirdweb-svelte-provider/context.js';
 	import { Button } from '$/components/ui/button/index.js';
 	import { SocialIcon } from '../../components/social-icon/index.js';
@@ -29,7 +29,7 @@
 				chain,
 				strategy: provider
 			});
-			setThirdwebSvelteContext({ account: acc });
+			connectAccount(acc);
 			closeModal();
 		} catch (err) {
 			const message = (err as Error)?.message || 'An error occurred';

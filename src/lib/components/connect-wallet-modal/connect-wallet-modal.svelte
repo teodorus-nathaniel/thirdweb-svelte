@@ -3,7 +3,7 @@
 	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
 	import { Button } from '../ui/button/index.js';
 	import Thirdweb from './components/thirdweb.svelte';
-	import type { Props } from './index.js';
+	import type { ConnectWalletModalProps } from './index.js';
 	import { type ConnectWalletModalStep } from './steps/index.js';
 	import { ProviderSelector } from './steps/provider-selector/index.js';
 	import { WalletSelector } from './steps/wallet-selector/index.js';
@@ -12,7 +12,7 @@
 	import { cn } from '$/utils.js';
 	import type { Action } from 'svelte/action';
 
-	type $$Props = Props;
+	type $$Props = ConnectWalletModalProps;
 	export let theme: $$Props['theme'] = 'dark';
 	export let open: $$Props['open'] = false;
 
