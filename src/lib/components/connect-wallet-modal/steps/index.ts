@@ -28,7 +28,8 @@ export type ConnectWalletModalStepProps<CurrentStep extends ConnectWalletModalSt
 	onFinishConnect: (account: Account) => void;
 	setStep: <Step extends ConnectWalletModalStep>(
 		step: Step,
-		additionalProps: ConnectWalletModalStepsAdditionalProps[Step]
+		additionalProps: ConnectWalletModalStepsAdditionalProps[Step],
+		customTitle?: string
 	) => void;
 	additionalProps: ConnectWalletModalStepsAdditionalProps[CurrentStep];
 };

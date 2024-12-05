@@ -23,7 +23,7 @@
 		variant="ghost"
 		on:click={async () => {
 			await wallet.onConnectRequested?.();
-			setStep('wallet-connect', { wallet });
+			setStep('wallet-connect', { wallet }, walletName);
 		}}
 	>
 		<WalletImage walletId={wallet.id} />

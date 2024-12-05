@@ -24,10 +24,17 @@
 
 	let step: ConnectWalletModalStep = 'provider-selector';
 	let additionalProps: any = undefined;
+	let customTitle = '';
 
-	const setStep = (nextStep: ConnectWalletModalStep, nextAdditionalProps: unknown = undefined) => {
+	const setStep = (
+		nextStep: ConnectWalletModalStep,
+		nextAdditionalProps: unknown = undefined,
+		nextCustomTitle?: string
+	) => {
 		additionalProps = nextAdditionalProps;
 		step = nextStep;
+		if (nextCustomTitle) customTitle = nextCustomTitle;
+		else customTitle = '';
 	};
 	const closeModal = () => {
 		open = false;
@@ -57,6 +64,8 @@
 		}
 	}
 	$: hideFooter = step === 'oauth-error' || step === 'oauth-loading' || step === 'wallet-connect';
+
+	$: title = customTitle || 'Sign in';
 </script>
 
 <Dialog.Root {...$$restProps} {open}>
@@ -77,7 +86,7 @@
 					<ChevronLeft />
 				</Button>
 			{/if}
-			<Dialog.Title class="twsv-w-fit twsv-text-xl">Sign in</Dialog.Title>
+			<Dialog.Title class="twsv-w-fit twsv-text-xl">{title}</Dialog.Title>
 		</Dialog.Header>
 		<div
 			style="--height: {height ? `${height}px` : 'auto'}"
