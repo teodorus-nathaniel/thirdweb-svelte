@@ -4,18 +4,15 @@
 	import type { ConnectWalletModalStepProps } from '../index.js';
 	import Button from '$/components/ui/button/button.svelte';
 	import Skeleton from '$/components/ui/skeleton/skeleton.svelte';
-	import { getWalletInfoImageQuery, getWalletInfoQuery } from '$/queries/wallets.js';
+	import { getWalletInfoQuery } from '$/queries/wallets.js';
+	import WalletImage from '../../components/wallet-image.svelte';
 
 	export let wallet: Wallet;
 	export let setStep: ConnectWalletModalStepProps<'wallet-selector'>['setStep'];
 
 	$: installedWalletInfo = getInstalledWalletProviders().find((x) => x.info.rdns === wallet.id);
-	$: installedWalletImage = installedWalletInfo?.info.icon;
-
 	$: walletInfoQuery = getWalletInfoQuery(wallet.id);
-	$: walletInfoImageQuery = getWalletInfoImageQuery(wallet.id, { enabled: !installedWalletImage });
 
-	$: image = installedWalletImage || $walletInfoImageQuery.data;
 	$: walletName = installedWalletInfo?.info.name || $walletInfoQuery.data?.name;
 </script>
 
@@ -29,11 +26,7 @@
 			setStep('wallet-connect', { wallet });
 		}}
 	>
-		{#if image}
-			<img class="twsv-h-12 twsv-w-12 twsv-rounded-lg" src={image} alt="" />
-		{:else}
-			<Skeleton class="twsv-h-12 twsv-w-12 twsv-rounded-lg" />
-		{/if}
+		<WalletImage walletId={wallet.id} />
 		<div class="twsv-flex twsv-flex-col twsv-text-left">
 			{#if walletName}
 				<span class="twsv-font-semibold">{walletName}</span>

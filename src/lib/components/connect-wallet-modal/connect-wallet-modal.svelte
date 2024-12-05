@@ -49,7 +49,7 @@
 			step = 'provider-selector';
 		}
 	}
-	$: hideFooter = step === 'oauth-error' || step === 'oauth-loading';
+	$: hideFooter = step === 'oauth-error' || step === 'oauth-loading' || step === 'wallet-connect';
 </script>
 
 <Dialog.Root {...$$restProps} {open}>
