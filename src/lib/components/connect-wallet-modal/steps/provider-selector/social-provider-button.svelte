@@ -1,8 +1,5 @@
 <script lang="ts">
-	import {
-		connectAccount,
-		getThirdwebSvelteContext
-	} from '$/components/thirdweb-svelte-provider/context.js';
+	import { getThirdwebSvelteContext } from '$/components/thirdweb-svelte-provider/context.js';
 	import { Button } from '$/components/ui/button/index.js';
 	import { SocialIcon } from '../../components/social-icon/index.js';
 	import { type Chain, type ThirdwebClient } from 'thirdweb';
@@ -10,7 +7,7 @@
 	import type { SupportedSocialProvider } from './index.js';
 
 	const context = getThirdwebSvelteContext();
-	export let client: ThirdwebClient | null = context?.client ?? null;
+	export let client: ThirdwebClient = context.client;
 	export let chain: Chain | undefined = undefined;
 	export let provider: SupportedSocialProvider;
 	export let setStep: ConnectWalletModalStepProps<'provider-selector'>['setStep'];
@@ -29,7 +26,7 @@
 				chain,
 				strategy: provider
 			});
-			connectAccount(acc);
+			context.account.set(acc);
 			closeModal();
 		} catch (err) {
 			const message = (err as Error)?.message || 'An error occurred';

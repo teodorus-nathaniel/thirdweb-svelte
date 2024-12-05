@@ -7,30 +7,11 @@ type ThirdwebSvelteContext = {
 	wallet: Wallet;
 	client: ThirdwebClient;
 	account: Writable<Account | null>;
-} | null;
+	disconnect: () => void;
+};
 const getThirdwebSvelteContext = () => getContext<ThirdwebSvelteContext>('providerContext');
 const setThirdwebSvelteContext = (context: ThirdwebSvelteContext) => {
 	setContext('providerContext', context);
 };
 
-const connectAccount = async (account: Account) => {
-	const current = getThirdwebSvelteContext();
-	if (!current) return;
-	const state = current.account;
-	state.set(account);
-};
-const disconnect = async () => {
-	const current = getThirdwebSvelteContext();
-	if (!current) return;
-
-	current.wallet.disconnect();
-	current.account.set(null);
-};
-
-export {
-	getThirdwebSvelteContext,
-	setThirdwebSvelteContext,
-	connectAccount,
-	disconnect,
-	type ThirdwebSvelteContext
-};
+export { getThirdwebSvelteContext, setThirdwebSvelteContext, type ThirdwebSvelteContext };

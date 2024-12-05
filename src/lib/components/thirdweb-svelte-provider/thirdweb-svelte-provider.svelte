@@ -12,7 +12,12 @@
 	});
 	const wallet = inAppWallet();
 	const account = writable<Account | null>(null);
-	setThirdwebSvelteContext({ wallet, client, account });
+
+	const disconnect = async () => {
+		await wallet.disconnect();
+		account.set(null);
+	};
+	setThirdwebSvelteContext({ wallet, client, account, disconnect });
 
 	const queryClient = new QueryClient();
 </script>

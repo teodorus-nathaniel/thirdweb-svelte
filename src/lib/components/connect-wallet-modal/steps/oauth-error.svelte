@@ -1,20 +1,22 @@
 <script lang="ts">
-	import { connectAccount } from '$/components/thirdweb-svelte-provider/context.js';
 	import { Button } from '$/components/ui/button/index.js';
 	import { cn } from '$/utils.js';
 	import { Spinner } from '$/components/ui/spinner/index.js';
 	import type { ConnectWalletModalStepProps } from './index.js';
+	import { getThirdwebSvelteContext } from '$/components/thirdweb-svelte-provider/context.js';
 
 	type $$Props = ConnectWalletModalStepProps<'oauth-error'>;
 	export let additionalProps: $$Props['additionalProps'];
 	export let closeModal: $$Props['closeModal'];
+
+	const context = getThirdwebSvelteContext();
 
 	let isRetrying = false;
 	const handleRetry = async () => {
 		isRetrying = true;
 		try {
 			const account = await additionalProps.retry();
-			connectAccount(account);
+			context.account.set(account);
 			closeModal();
 		} catch (err) {
 			additionalProps.message = (err as Error)?.message || 'An error occurred';

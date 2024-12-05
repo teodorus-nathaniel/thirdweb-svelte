@@ -1,4 +1,4 @@
 import ThirdwebSvelteProvider from './thirdweb-svelte-provider.svelte';
-import { getThirdwebSvelteContext, disconnect } from './context.js';
+import { getThirdwebSvelteContext } from './context.js';
 
-export { ThirdwebSvelteProvider, getThirdwebSvelteContext, disconnect };
+export { ThirdwebSvelteProvider, getThirdwebSvelteContext };
