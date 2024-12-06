@@ -36,9 +36,11 @@
 		<Button
 			variant="link"
 			size="auto"
-			class="twsv-text-accent-foreground"
 			href="https://blog.thirdweb.com/web3-wallet/"
-			target="_blank">Get Started</Button
+			target="_blank"
+			rel="noopener noreferrer"
 		>
+			Get Started
+		</Button>
 	</div>
 </div>

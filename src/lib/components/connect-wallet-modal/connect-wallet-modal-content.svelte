@@ -11,12 +11,17 @@
 	import OauthError from './steps/oauth-error.svelte';
 	import { WalletConnect } from './steps/wallet-connect/index.js';
 	import Thirdweb from './components/thirdweb.svelte';
+	import type { ConnectWalletModalProps } from './index.js';
 
 	export let step: ConnectWalletModalStep;
 	export let setStep: ConnectWalletModalStepProps<'provider-selector'>['setStep'];
 	export let closeModal: () => void;
 	export let chain: Chain | undefined;
+	export let walletConnect: ConnectWalletModalProps['walletConnect'];
 	export let additionalProps: any;
+	export let chains: ConnectWalletModalProps['chains'];
+	export let setModalOpen: (open: boolean) => void;
+	export let setCustomBackClick: (backClick: (() => void) | null) => void;
 
 	const context = getThirdwebSvelteContext();
 
@@ -46,15 +51,60 @@
 >
 	<div class="twsv-flex twsv-flex-col" use:heightObserver>
 		{#if step === 'provider-selector'}
-			<ProviderSelector {setStep} {onFinishConnect} {chain} {additionalProps} />
+			<ProviderSelector
+				{chains}
+				{walletConnect}
+				{setStep}
+				{onFinishConnect}
+				{chain}
+				{additionalProps}
+				{setModalOpen}
+				{setCustomBackClick}
+			/>
 		{:else if step === 'wallet-selector'}
-			<WalletSelector {setStep} {onFinishConnect} {chain} {additionalProps} />
+			<WalletSelector
+				{chains}
+				{walletConnect}
+				{setStep}
+				{onFinishConnect}
+				{chain}
+				{additionalProps}
+				{setModalOpen}
+				{setCustomBackClick}
+			/>
 		{:else if step === 'oauth-loading'}
-			<OauthLoading {setStep} {onFinishConnect} {chain} {additionalProps} />
+			<OauthLoading
+				{chains}
+				{walletConnect}
+				{setStep}
+				{onFinishConnect}
+				{chain}
+				{additionalProps}
+				{setModalOpen}
+				{setCustomBackClick}
+			/>
 		{:else if step === 'oauth-error'}
-			<OauthError {setStep} {onFinishConnect} {chain} {additionalProps} />
+			<OauthError
+				{chains}
+				{walletConnect}
+				{setStep}
+				{onFinishConnect}
+				{chain}
+				{additionalProps}
+				{setModalOpen}
+				{setCustomBackClick}
+			/>
 		{:else if step === 'wallet-connect'}
-			<WalletConnect {setStep} {onFinishConnect} {chain} {additionalProps} />
+			<WalletConnect
+				{chains}
+				{walletConnect}
+				{setStep}
+				{onFinishConnect}
+				{chain}
+				{additionalProps}
+				{setModalOpen}
+				{setCustomBackClick}
+			/>
 		{/if}
 		{#if !hideFooter}
 			<Button
@@ -62,7 +112,8 @@
 				variant="link"
 				size="auto"
 				target="_blank"
-				class="twsv-mx-auto twsv-mt-8 twsv-flex twsv-w-fit twsv-items-center twsv-justify-center twsv-gap-1 twsv-text-muted-foreground !twsv-no-underline hover:twsv-text-foreground focus-visible:twsv-text-foreground"
+				rel="noopener noreferrer"
+				class="twsv-mx-auto twsv-mt-8 twsv-flex twsv-w-fit twsv-items-center twsv-justify-center twsv-gap-1 twsv-text-muted-foreground"
 			>
 				<span class="twsv-text-sm twsv-font-semibold twsv-leading-normal">Powered by</span>
 				<Thirdweb height={12} class="twsv-relative twsv-top-px" />

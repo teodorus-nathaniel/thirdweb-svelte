@@ -12,6 +12,8 @@
 	export let wallet: Wallet;
 	export let chain: Chain | undefined = undefined;
 	export let onFinishConnect: (account: Account) => void;
+	export let chains: Chain[] | undefined = undefined;
+	export let onGetStartedClick: (() => void) | null = null;
 
 	const context = getThirdwebSvelteContext();
 
@@ -24,7 +26,8 @@
 			await wait(1000);
 			const account = await wallet.connect({
 				client: context.client,
-				chain
+				chain,
+				optionalChains: chains
 			});
 
 			onFinishConnect(account);
@@ -63,5 +66,12 @@
 				</Button>
 			{/if}
 		</div>
+	</div>
+	<div
+		class="-twsv-ml-6 -twsv-mr-6 twsv-border-t twsv-border-border twsv-p-4 twsv-pb-2 twsv-text-center twsv-text-sm"
+	>
+		<Button size="auto" variant="link" on:click={onGetStartedClick}>
+			Don't have {walletName}?
+		</Button>
 	</div>
 </div>
