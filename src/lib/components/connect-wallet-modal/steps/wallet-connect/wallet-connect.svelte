@@ -22,6 +22,13 @@
 	export let setModalOpen: $$Props['setModalOpen'];
 	export let setCustomBackClick: $$Props['setCustomBackClick'];
 
+	let screen: 'main' | 'get-started' = 'main';
+	$: {
+		if (screen === 'main') {
+			setCustomBackClick(null);
+		}
+	}
+
 	$: wallet = additionalProps.wallet;
 	$: walletInfoQuery = getWalletInfoQuery(wallet.id);
 
@@ -39,16 +46,34 @@
 {:else if !$walletInfoQuery.data}
 	{@const injectedProvider = getInstalledWalletData(wallet.id)}
 	{#if injectedProvider}
-		<InjectedWalletConnect {onFinishConnect} {wallet} {chain} />
+		<InjectedWalletConnect
+			onGetStartedClick={() => (screen = 'get-started')}
+			{onFinishConnect}
+			{wallet}
+			{chain}
+		/>
 	{:else}
 		<WalletNotSupported />
 	{/if}
+{:else if screen === 'get-started'}
+	<WalletGetStarted
+		baseCustomBackClick={() => (screen = 'main')}
+		{wallet}
+		walletInfo={$walletInfoQuery.data}
+		{setCustomBackClick}
+	/>
 {:else}
 	{@const isInstalled = getInstalledWalletProviders().find((w) => w.info.rdns === wallet.id)}
 	{#if $walletInfoQuery.data.deepLink && !isInstalled && preferDeepLink && isMobile()}
 		<DeepLinkConnect deepLinkPrefix={$walletInfoQuery.data.deepLink.mobile} walletId={wallet.id} />
 	{:else if $walletInfoQuery.data.rdns && isInstalled}
-		<InjectedWalletConnect {chains} {onFinishConnect} {wallet} {chain} />
+		<InjectedWalletConnect
+			onGetStartedClick={() => (screen = 'get-started')}
+			{chains}
+			{onFinishConnect}
+			{wallet}
+			{chain}
+		/>
 	{:else if $walletInfoQuery.data.mobile.native && $walletInfoQuery.data.mobile.universal}
 		<WalletconnectConnect
 			{chains}
@@ -69,7 +94,13 @@
 			{setModalOpen}
 		/>
 	{:else if wallet.id}
-		<InjectedWalletConnect {chains} {onFinishConnect} {wallet} {chain} />
+		<InjectedWalletConnect
+			onGetStartedClick={() => (screen = 'get-started')}
+			{chains}
+			{onFinishConnect}
+			{wallet}
+			{chain}
+		/>
 	{:else}
 		<WalletGetStarted {wallet} walletInfo={$walletInfoQuery.data} {setCustomBackClick} />
 	{/if}

@@ -102,7 +102,7 @@
 		<Button
 			variant="link"
 			size="auto"
-			class="twsv-mx-auto twsv-mt-2 twsv-w-fit twsv-text-accent-foreground !twsv-no-underline hover:twsv-text-foreground focus:twsv-text-foreground"
+			class="twsv-mx-auto twsv-mt-2 twsv-w-fit"
 			on:click={async () => {
 				try {
 					await navigator.clipboard.writeText(qrCodeUri);

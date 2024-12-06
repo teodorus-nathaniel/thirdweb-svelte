@@ -11,6 +11,7 @@
 
 	export let wallet: Wallet;
 	export let walletInfo: WalletInfo;
+	export let baseCustomBackClick: (() => void) | null = null;
 	export let setCustomBackClick: (backClick: (() => void) | null) => void;
 
 	let showScreen = 'base' as 'base' | 'android-scan' | 'ios-scan';
@@ -20,7 +21,7 @@
 				showScreen = 'base';
 			});
 		} else {
-			setCustomBackClick(null);
+			setCustomBackClick(baseCustomBackClick);
 		}
 	}
 

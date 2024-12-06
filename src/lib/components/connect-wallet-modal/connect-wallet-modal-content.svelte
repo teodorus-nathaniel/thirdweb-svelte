@@ -112,7 +112,7 @@
 				variant="link"
 				size="auto"
 				target="_blank"
-				class="twsv-mx-auto twsv-mt-8 twsv-flex twsv-w-fit twsv-items-center twsv-justify-center twsv-gap-1 twsv-text-muted-foreground !twsv-no-underline hover:twsv-text-foreground focus-visible:twsv-text-foreground"
+				class="twsv-mx-auto twsv-mt-8 twsv-flex twsv-w-fit twsv-items-center twsv-justify-center twsv-gap-1 twsv-text-muted-foreground"
 			>
 				<span class="twsv-text-sm twsv-font-semibold twsv-leading-normal">Powered by</span>
 				<Thirdweb height={12} class="twsv-relative twsv-top-px" />
