@@ -12,7 +12,6 @@
 	import { WalletConnect } from './steps/wallet-connect/index.js';
 	import Thirdweb from './components/thirdweb.svelte';
 	import type { ConnectWalletModalProps } from './index.js';
-	import type { Connect } from 'vite';
 
 	export let step: ConnectWalletModalStep;
 	export let setStep: ConnectWalletModalStepProps<'provider-selector'>['setStep'];
