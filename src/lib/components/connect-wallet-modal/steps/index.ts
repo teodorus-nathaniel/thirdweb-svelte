@@ -29,6 +29,7 @@ export type ConnectWalletModalStepProps<CurrentStep extends ConnectWalletModalSt
 	chains?: Chain[];
 	walletConnect: ConnectWalletModalProps['walletConnect'];
 	onFinishConnect: (account: Account) => void;
+	setModalOpen: (open: boolean) => void;
 	setStep: <Step extends ConnectWalletModalStep>(
 		step: Step,
 		additionalProps: ConnectWalletModalStepsAdditionalProps[Step],

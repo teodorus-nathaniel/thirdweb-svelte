@@ -12,6 +12,7 @@
 	import { WalletConnect } from './steps/wallet-connect/index.js';
 	import Thirdweb from './components/thirdweb.svelte';
 	import type { ConnectWalletModalProps } from './index.js';
+	import type { Connect } from 'vite';
 
 	export let step: ConnectWalletModalStep;
 	export let setStep: ConnectWalletModalStepProps<'provider-selector'>['setStep'];
@@ -20,6 +21,7 @@
 	export let walletConnect: ConnectWalletModalProps['walletConnect'];
 	export let additionalProps: any;
 	export let chains: ConnectWalletModalProps['chains'];
+	export let setModalOpen: (open: boolean) => void;
 
 	const context = getThirdwebSvelteContext();
 
@@ -56,6 +58,7 @@
 				{onFinishConnect}
 				{chain}
 				{additionalProps}
+				{setModalOpen}
 			/>
 		{:else if step === 'wallet-selector'}
 			<WalletSelector
@@ -65,6 +68,7 @@
 				{onFinishConnect}
 				{chain}
 				{additionalProps}
+				{setModalOpen}
 			/>
 		{:else if step === 'oauth-loading'}
 			<OauthLoading
@@ -74,9 +78,18 @@
 				{onFinishConnect}
 				{chain}
 				{additionalProps}
+				{setModalOpen}
 			/>
 		{:else if step === 'oauth-error'}
-			<OauthError {chains} {walletConnect} {setStep} {onFinishConnect} {chain} {additionalProps} />
+			<OauthError
+				{chains}
+				{walletConnect}
+				{setStep}
+				{onFinishConnect}
+				{chain}
+				{additionalProps}
+				{setModalOpen}
+			/>
 		{:else if step === 'wallet-connect'}
 			<WalletConnect
 				{chains}
@@ -85,6 +98,7 @@
 				{onFinishConnect}
 				{chain}
 				{additionalProps}
+				{setModalOpen}
 			/>
 		{/if}
 		{#if !hideFooter}

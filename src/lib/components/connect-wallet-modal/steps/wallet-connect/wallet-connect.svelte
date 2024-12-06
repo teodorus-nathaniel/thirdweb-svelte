@@ -9,6 +9,7 @@
 	import type { Account, Wallet, WCSupportedWalletIds } from 'thirdweb/wallets';
 	import DeepLinkConnect from './deep-link-connect.svelte';
 	import WalletconnectConnect from './walletconnect-connect.svelte';
+	import WalletconnectStandaloneConnect from './walletconnect-standalone-connect.svelte';
 
 	type $$Props = ConnectWalletModalStepProps<'wallet-connect'>;
 	export let additionalProps: $$Props['additionalProps'];
@@ -16,6 +17,7 @@
 	export let onFinishConnect: (account: Account) => void;
 	export let walletConnect: $$Props['walletConnect'];
 	export let chains: $$Props['chains'] = undefined;
+	export let setModalOpen: $$Props['setModalOpen'];
 
 	$: wallet = additionalProps.wallet;
 	$: walletInfoQuery = getWalletInfoQuery(wallet.id);
@@ -23,7 +25,8 @@
 	$: preferDeepLink = (wallet.getConfig() as { preferDeepLink: boolean | undefined } | undefined)
 		?.preferDeepLink;
 
-	$: parsedWallet = wallet as Wallet<WCSupportedWalletIds>;
+	$: wcSupportedWallet = wallet as Wallet<WCSupportedWalletIds>;
+	$: wcWallet = wallet as Wallet<'walletConnect'>;
 </script>
 
 {#if $walletInfoQuery.isLoading}
@@ -47,13 +50,21 @@
 		<WalletconnectConnect
 			{chains}
 			{chain}
-			wallet={parsedWallet}
+			wallet={wcSupportedWallet}
 			walletInfo={$walletInfoQuery.data}
 			{onFinishConnect}
 			{walletConnect}
 		/>
 	{:else if wallet.id === 'walletConnect'}
-		<!-- TODO: WalletConnectStandaloneConnection -->
+		<WalletconnectStandaloneConnect
+			{chains}
+			{chain}
+			wallet={wcWallet}
+			walletInfo={$walletInfoQuery.data}
+			{onFinishConnect}
+			{walletConnect}
+			{setModalOpen}
+		/>
 	{:else if wallet.id}
 		<!-- TODO: CoinbaseSDKWalletConnectUI -->
 	{:else}
