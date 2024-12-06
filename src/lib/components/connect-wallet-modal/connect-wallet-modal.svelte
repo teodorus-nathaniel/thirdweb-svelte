@@ -1,28 +1,33 @@
 <script lang="ts">
-	import * as Dialog from '$lib/components/ui/dialog/index.js';
+	import * as Dialog from '$/components/ui/dialog/index.js';
 	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
 	import { Button } from '../ui/button/index.js';
-	import ProviderSelector from './steps/provider-selector.svelte';
 	import Thirdweb from './components/thirdweb.svelte';
-	import type { Props } from './index.js';
-	import type { ConnectWalletModalStep } from './steps/types.js';
-	import { cn } from '$/utils.js';
+	import type { ConnectWalletModalProps } from './index.js';
+	import { type ConnectWalletModalStep } from './steps/index.js';
+	import { ProviderSelector } from './steps/provider-selector/index.js';
 	import { WalletSelector } from './steps/wallet-selector/index.js';
+	import OauthLoading from './steps/oauth-loading.svelte';
+	import OauthError from './steps/oauth-error.svelte';
+	import { cn } from '$/utils.js';
 	import type { Action } from 'svelte/action';
 
-	type $$Props = Props;
+	type $$Props = ConnectWalletModalProps;
 	export let theme: $$Props['theme'] = 'dark';
 	export let open: $$Props['open'] = false;
 
 	let step: ConnectWalletModalStep = 'provider-selector';
-	let stepsHistory: ConnectWalletModalStep[] = [];
+	let additionalProps: any = undefined;
 
-	const changeStep = (nextStep: ConnectWalletModalStep) => {
-		stepsHistory.push(step);
+	const changeStep = (
+		nextStep: ConnectWalletModalStep,
+		nextAdditionalProps: unknown = undefined
+	) => {
+		additionalProps = nextAdditionalProps;
 		step = nextStep;
 	};
-	const back = () => {
-		step = stepsHistory.pop()!;
+	const closeModal = () => {
+		open = false;
 	};
 
 	let height = 0;
@@ -37,13 +42,13 @@
 		};
 	};
 
-	$: showBackButton = step !== 'provider-selector' && stepsHistory.length > 0;
+	$: showBackButton = step !== 'provider-selector';
 	$: {
 		if (open) {
 			step = 'provider-selector';
-			stepsHistory = [];
 		}
 	}
+	$: hideFooter = step === 'oauth-error' || step === 'oauth-loading';
 </script>
 
 <Dialog.Root {...$$restProps} {open}>
@@ -59,7 +64,7 @@
 					variant="ghost"
 					size="auto"
 					class="twsv-absolute -twsv-left-2 twsv-top-0 twsv-text-muted-foreground"
-					on:click={back}
+					on:click={() => changeStep('provider-selector')}
 				>
 					<ChevronLeft />
 				</Button>
@@ -72,20 +77,28 @@
 		>
 			<div class="twsv-flex twsv-flex-col" use:heightObserver>
 				{#if step === 'provider-selector'}
-					<ProviderSelector setStep={changeStep} />
+					<ProviderSelector setStep={changeStep} {additionalProps} {closeModal} />
 				{:else if step === 'wallet-selector'}
-					<WalletSelector setStep={changeStep} />
+					<WalletSelector setStep={changeStep} {additionalProps} {closeModal} />
+				{:else if step === 'oauth-loading'}
+					<OauthLoading setStep={changeStep} {additionalProps} {closeModal} />
+				{:else if step === 'oauth-error'}
+					<OauthError setStep={changeStep} {additionalProps} {closeModal} />
+				{:else}
+					<p>Unknown step: {step}</p>
 				{/if}
-				<Button
-					href="https://thirdweb.com/connect?utm_source=cw_text"
-					variant="link"
-					size="auto"
-					target="_blank"
-					class="twsv-mx-auto twsv-mt-8 twsv-flex twsv-w-fit twsv-items-center twsv-justify-center twsv-gap-1 twsv-text-muted-foreground !twsv-no-underline hover:twsv-text-foreground focus-visible:twsv-text-foreground"
-				>
-					<span class="twsv-text-sm twsv-font-semibold twsv-leading-normal">Powered by</span>
-					<Thirdweb height={12} class="twsv-relative twsv-top-px" />
-				</Button>
+				{#if !hideFooter}
+					<Button
+						href="https://thirdweb.com/connect?utm_source=cw_text"
+						variant="link"
+						size="auto"
+						target="_blank"
+						class="twsv-mx-auto twsv-mt-8 twsv-flex twsv-w-fit twsv-items-center twsv-justify-center twsv-gap-1 twsv-text-muted-foreground !twsv-no-underline hover:twsv-text-foreground focus-visible:twsv-text-foreground"
+					>
+						<span class="twsv-text-sm twsv-font-semibold twsv-leading-normal">Powered by</span>
+						<Thirdweb height={12} class="twsv-relative twsv-top-px" />
+					</Button>
+				{/if}
 			</div>
 		</div>
 	</Dialog.Content>

@@ -16,6 +16,31 @@ const config: Config = {
 			}
 		},
 		extend: {
+			keyframes: {
+				'dash-animation': {
+					'0%': {
+						strokeDasharray: '1, 150',
+						strokeDashoffset: '0'
+					},
+					'50%': {
+						strokeDasharray: '90, 150',
+						strokeDashoffset: '-35'
+					},
+					'100%': {
+						strokeDasharray: '90, 150',
+						strokeDashoffset: '-124'
+					}
+				},
+				'rotate-animation': {
+					'100%': {
+						transform: 'rotate(360deg)'
+					}
+				}
+			},
+			animation: {
+				'dash-animation': 'dash-animation 1.5s ease-in-out infinite',
+				'rotate-animation': 'rotate-animation 2s linear infinite'
+			},
 			colors: {
 				border: 'hsl(var(--twsv-border) / <alpha-value>)',
 				input: 'hsl(var(--twsv-input) / <alpha-value>)',

@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { ConnectWalletModalStepProps } from '../types.js';
+	import type { ConnectWalletModalStepProps } from '../index.js';
 	import { getDefaultWallets, getInstalledWallets, sortWallets } from './index.js';
 	import { type Wallet } from 'thirdweb/wallets';
 	import WalletSelectorItem from './wallet-selector-item.svelte';
 	import Separator from '$/components/ui/separator/separator.svelte';
 	import Button from '$/components/ui/button/button.svelte';
 
-	type $$Props = ConnectWalletModalStepProps;
+	type $$Props = ConnectWalletModalStepProps<'wallet-selector'>;
 	export let setStep: $$Props['setStep'];
 
 	const defaultWallets = getDefaultWallets();
@@ -24,7 +24,7 @@
 
 <div class="-twsv-ml-6 -twsv-mr-6 twsv-flex twsv-flex-col">
 	<ul
-		class="twsv-scrollbar-none twsv-flex twsv-max-h-96 twsv-flex-col twsv-items-center twsv-overflow-y-auto twsv-px-4 twsv-pb-6"
+		class="twsv-flex twsv-max-h-96 twsv-flex-col twsv-items-center twsv-overflow-y-auto twsv-px-4 twsv-pb-6 twsv-scrollbar-none"
 	>
 		{#each sorted as wallet}
 			<WalletSelectorItem {wallet} {setStep} />

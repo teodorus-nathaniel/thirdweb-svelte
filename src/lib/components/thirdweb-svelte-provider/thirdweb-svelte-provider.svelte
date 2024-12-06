@@ -1,5 +1,23 @@
 <script lang="ts">
 	import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
+	import { inAppWallet, type Account } from 'thirdweb/wallets';
+	import { setThirdwebSvelteContext } from './context.js';
+	import { createThirdwebClient } from 'thirdweb';
+	import { writable } from 'svelte/store';
+
+	export let clientId: string;
+
+	const client = createThirdwebClient({
+		clientId: clientId
+	});
+	const wallet = inAppWallet();
+	const account = writable<Account | null>(null);
+
+	const disconnect = async () => {
+		await wallet.disconnect();
+		account.set(null);
+	};
+	setThirdwebSvelteContext({ wallet, client, account, disconnect });
 
 	const queryClient = new QueryClient();
 </script>
