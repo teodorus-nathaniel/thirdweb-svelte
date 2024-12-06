@@ -10,6 +10,7 @@
 	import DeepLinkConnect from './deep-link-connect.svelte';
 	import WalletconnectConnect from './walletconnect-connect.svelte';
 	import WalletconnectStandaloneConnect from './walletconnect-standalone-connect.svelte';
+	import WalletNotSupported from './wallet-not-supported.svelte';
 
 	type $$Props = ConnectWalletModalStepProps<'wallet-connect'>;
 	export let additionalProps: $$Props['additionalProps'];
@@ -38,7 +39,7 @@
 	{#if injectedProvider}
 		<InjectedWalletConnect {onFinishConnect} {wallet} {chain} />
 	{:else}
-		<!-- TODO: unsupported screen -->
+		<WalletNotSupported />
 	{/if}
 {:else}
 	{@const isInstalled = getInstalledWalletProviders().find((w) => w.info.rdns === wallet.id)}
