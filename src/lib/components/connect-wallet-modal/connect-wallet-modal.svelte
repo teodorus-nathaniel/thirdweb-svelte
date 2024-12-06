@@ -102,7 +102,10 @@
 						variant="ghost"
 						size="auto"
 						class="twsv-absolute -twsv-left-2 twsv-top-0 twsv-text-muted-foreground"
-						on:click={() => setStep('provider-selector')}
+						on:click={() => {
+							if (customBackClick) customBackClick();
+							else setStep('provider-selector');
+						}}
 					>
 						<ChevronLeft />
 					</Button>
