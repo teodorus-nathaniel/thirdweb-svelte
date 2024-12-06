@@ -36,6 +36,7 @@
 			<Button
 				href={walletInfo.app.chrome}
 				target="_blank"
+				rel="noopener noreferrer"
 				variant="secondary"
 				class="twsv-flex twsv-h-12 twsv-w-full twsv-items-center twsv-justify-start twsv-gap-4"
 			>

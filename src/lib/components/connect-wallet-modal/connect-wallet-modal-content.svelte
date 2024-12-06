@@ -112,6 +112,7 @@
 				variant="link"
 				size="auto"
 				target="_blank"
+				rel="noopener noreferrer"
 				class="twsv-mx-auto twsv-mt-8 twsv-flex twsv-w-fit twsv-items-center twsv-justify-center twsv-gap-1 twsv-text-muted-foreground"
 			>
 				<span class="twsv-text-sm twsv-font-semibold twsv-leading-normal">Powered by</span>

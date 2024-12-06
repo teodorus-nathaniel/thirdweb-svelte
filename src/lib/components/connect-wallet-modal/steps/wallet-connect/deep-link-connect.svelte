@@ -20,7 +20,7 @@
 			<WalletImage {walletId} class="twsv-h-20 twsv-w-20" />
 		</div>
 	</div>
-	<Button variant="accent" class="twsv-w-full" {href} target="_blank">
+	<Button variant="accent" class="twsv-w-full" {href} target="_blank" rel="noopener noreferrer">
 		Continue in {walletName}
 		<SquareArrowOutUpRight class="twsv-ml-2 twsv-h-4 twsv-w-4" />
 	</Button>

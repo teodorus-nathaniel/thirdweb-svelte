@@ -38,6 +38,7 @@
 			size="auto"
 			href="https://blog.thirdweb.com/web3-wallet/"
 			target="_blank"
+			rel="noopener noreferrer"
 		>
 			Get Started
 		</Button>
