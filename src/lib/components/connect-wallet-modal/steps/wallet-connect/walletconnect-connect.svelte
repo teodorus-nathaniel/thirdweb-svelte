@@ -87,7 +87,12 @@
 		<div class="twsv-py-14">
 			<WalletLogoSpinner walletId={wallet.id} error={errorConnecting} />
 		</div>
-		<div class="twsv-flex twsv-flex-col">Mobile view</div>
+		<div class="twsv-flex twsv-flex-col twsv-gap-3 twsv-pb-2 twsv-text-center">
+			<span class="twsv-text-xl twsv-font-semibold">Awaiting Confirmation</span>
+			<span class="twsv-text-muted-foreground"
+				>Accept the connection request in {walletInfo.name}</span
+			>
+		</div>
 	</div>
 {:else}
 	<div class="twsv-flex twsv-flex-col twsv-items-center twsv-pt-3 twsv-text-center">
