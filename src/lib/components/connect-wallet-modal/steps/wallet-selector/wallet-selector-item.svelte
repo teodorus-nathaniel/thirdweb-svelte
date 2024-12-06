@@ -1,29 +1,18 @@
 <script lang="ts">
-	import { getWalletInfo, type Wallet } from 'thirdweb/wallets';
-	import { getInstalledWalletProviders } from './index.js';
-	import type { ConnectWalletModalStep, ConnectWalletModalStepProps } from '../index.js';
+	import { type Wallet } from 'thirdweb/wallets';
+	import { getInstalledWalletData, getInstalledWalletProviders } from './index.js';
+	import type { ConnectWalletModalStepProps } from '../index.js';
 	import Button from '$/components/ui/button/button.svelte';
-	import { createQuery } from '@tanstack/svelte-query';
 	import Skeleton from '$/components/ui/skeleton/skeleton.svelte';
+	import { getWalletInfoQuery } from '$/queries/wallets.js';
+	import WalletImage from '../../components/wallet-image.svelte';
 
 	export let wallet: Wallet;
 	export let setStep: ConnectWalletModalStepProps<'wallet-selector'>['setStep'];
 
-	$: installedWalletInfo = getInstalledWalletProviders().find((x) => x.info.rdns === wallet.id);
-	$: installedWalletImage = installedWalletInfo?.info.icon;
+	$: installedWalletInfo = getInstalledWalletData(wallet.id);
+	$: walletInfoQuery = getWalletInfoQuery(wallet.id);
 
-	const walletInfoQuery = createQuery({
-		queryKey: ['wallet-info', wallet.id],
-		queryFn: () => getWalletInfo(wallet.id)
-	});
-
-	const walletInfoImageQuery = createQuery({
-		queryKey: ['wallet-info-image', wallet.id],
-		queryFn: () => getWalletInfo(wallet.id, true),
-		enabled: !installedWalletImage
-	});
-
-	$: image = installedWalletImage || $walletInfoImageQuery.data;
 	$: walletName = installedWalletInfo?.info.name || $walletInfoQuery.data?.name;
 </script>
 
@@ -32,12 +21,12 @@
 		size="auto"
 		class="twsv-w-full twsv-justify-start twsv-gap-3 twsv-p-2 twsv-transition-transform hover:twsv-scale-[1.01]"
 		variant="ghost"
+		on:click={async () => {
+			await wallet.onConnectRequested?.();
+			setStep('wallet-connect', { wallet }, walletName);
+		}}
 	>
-		{#if image}
-			<img class="twsv-h-12 twsv-w-12 twsv-rounded-lg" src={image} alt="" />
-		{:else}
-			<Skeleton class="twsv-h-12 twsv-w-12 twsv-rounded-lg" />
-		{/if}
+		<WalletImage walletId={wallet.id} />
 		<div class="twsv-flex twsv-flex-col twsv-text-left">
 			{#if walletName}
 				<span class="twsv-font-semibold">{walletName}</span>

@@ -11,7 +11,7 @@
 	export let chain: Chain | undefined = undefined;
 	export let provider: SupportedSocialProvider;
 	export let setStep: ConnectWalletModalStepProps<'provider-selector'>['setStep'];
-	export let closeModal: ConnectWalletModalStepProps<'provider-selector'>['closeModal'];
+	export let onFinishConnect: ConnectWalletModalStepProps<'provider-selector'>['onFinishConnect'];
 
 	const handleClick = async () => {
 		if (!context || !client) {
@@ -26,8 +26,7 @@
 				chain,
 				strategy: provider
 			});
-			context.account.set(acc);
-			closeModal();
+			onFinishConnect(acc);
 		} catch (err) {
 			const message = (err as Error)?.message || 'An error occurred';
 			setStep('oauth-error', {

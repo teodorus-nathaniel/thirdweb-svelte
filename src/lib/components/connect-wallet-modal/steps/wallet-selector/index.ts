@@ -37,6 +37,10 @@ function getInstalledWallets() {
 	return _installedWallets;
 }
 
+function getInstalledWalletData(walletId: WalletId) {
+	return getInstalledWalletProviders().find((x) => x.info.rdns === walletId);
+}
+
 type AppMetadata = {
 	/**
 	 * the name of your app
@@ -120,6 +124,7 @@ export {
 	WalletSelector,
 	getInstalledWalletProviders,
 	getInstalledWallets,
+	getInstalledWalletData,
 	getDefaultWallets,
 	sortWallets
 };

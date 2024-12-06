@@ -10,13 +10,14 @@ const buttonVariants = tv({
 			destructive:
 				'twsv-bg-destructive twsv-text-destructive-foreground hover:twsv-bg-destructive/90',
 			outline:
-				'twsv-border-input twsv-bg-background hover:twsv-border-accent hover:twsv-text-accent-foreground twsv-border',
+				'twsv-border-input twsv-bg-background hover:twsv-border-accent-foreground hover:twsv-text-foreground twsv-border',
 			secondary: 'twsv-bg-secondary twsv-text-secondary-foreground hover:twsv-bg-secondary/80',
 			ghost: 'hover:twsv-bg-secondary hover:twsv-text-secondary-foreground',
-			link: 'twsv-text-primary twsv-underline-offset-4 hover:twsv-underline'
+			link: 'twsv-text-primary twsv-underline-offset-4 hover:twsv-underline',
+			accent: 'twsv-bg-accent twsv-text-foreground hover:twsv-bg-accent/90'
 		},
 		size: {
-			default: 'twsv-h-12 twsv-px-4 twsv-py-2',
+			default: 'twsv-h-11 twsv-px-4 twsv-py-2',
 			sm: 'twsv-h-9 twsv-rounded-md twsv-px-3',
 			lg: 'twsv-h-11 twsv-rounded-md twsv-px-8',
 			icon: 'twsv-h-10 twsv-w-10',
