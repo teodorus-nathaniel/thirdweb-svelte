@@ -6,19 +6,24 @@
 	import InjectedWalletConnect from './injected-wallet-connect.svelte';
 	import { isMobile } from '$/utils/platform.js';
 	import type { Chain } from 'thirdweb';
-	import type { Account } from 'thirdweb/wallets';
+	import type { Account, Wallet, WCSupportedWalletIds } from 'thirdweb/wallets';
 	import DeepLinkConnect from './deep-link-connect.svelte';
+	import WalletconnectConnect from './walletconnect-connect.svelte';
 
 	type $$Props = ConnectWalletModalStepProps<'wallet-connect'>;
 	export let additionalProps: $$Props['additionalProps'];
 	export let chain: Chain | undefined;
 	export let onFinishConnect: (account: Account) => void;
+	export let walletConnect: $$Props['walletConnect'];
+	export let chains: $$Props['chains'] = undefined;
 
 	$: wallet = additionalProps.wallet;
 	$: walletInfoQuery = getWalletInfoQuery(wallet.id);
 
 	$: preferDeepLink = (wallet.getConfig() as { preferDeepLink: boolean | undefined } | undefined)
 		?.preferDeepLink;
+
+	$: parsedWallet = wallet as Wallet<WCSupportedWalletIds>;
 </script>
 
 {#if $walletInfoQuery.isLoading}
@@ -37,9 +42,16 @@
 	{#if $walletInfoQuery.data.deepLink && !isInstalled && preferDeepLink && isMobile()}
 		<DeepLinkConnect deepLinkPrefix={$walletInfoQuery.data.deepLink.mobile} walletId={wallet.id} />
 	{:else if $walletInfoQuery.data.rdns && isInstalled}
-		<InjectedWalletConnect {onFinishConnect} {wallet} {chain} />
+		<InjectedWalletConnect {chains} {onFinishConnect} {wallet} {chain} />
 	{:else if $walletInfoQuery.data.mobile.native && $walletInfoQuery.data.mobile.universal}
-		<!-- TODO: WalletConnectConnection -->
+		<WalletconnectConnect
+			{chains}
+			{chain}
+			wallet={parsedWallet}
+			walletInfo={$walletInfoQuery.data}
+			{onFinishConnect}
+			{walletConnect}
+		/>
 	{:else if wallet.id === 'walletConnect'}
 		<!-- TODO: WalletConnectStandaloneConnection -->
 	{:else if wallet.id}

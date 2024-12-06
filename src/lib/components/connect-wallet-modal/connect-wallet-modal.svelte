@@ -13,6 +13,8 @@
 	export let chain: $$Props['chain'] = undefined;
 	export let theme: $$Props['theme'] = 'dark';
 	export let open: $$Props['open'] = false;
+	export let walletConnect: $$Props['walletConnect'] = undefined;
+	export let chains: $$Props['chains'] = undefined;
 
 	const isDesktop = mediaQuery('(min-width: 768px)');
 
@@ -65,7 +67,15 @@
 				{/if}
 				<Dialog.Title class="twsv-w-fit twsv-text-xl">{title}</Dialog.Title>
 			</Dialog.Header>
-			<ConnectWalletModalContent {additionalProps} {closeModal} {chain} {setStep} {step} />
+			<ConnectWalletModalContent
+				{walletConnect}
+				{additionalProps}
+				{closeModal}
+				{chain}
+				{setStep}
+				{step}
+				{chains}
+			/>
 		</Dialog.Content>
 	</Dialog.Root>
 {:else}
@@ -89,7 +99,15 @@
 				{/if}
 				<Drawer.Title class="twsv-w-fit twsv-text-xl">{title}</Drawer.Title>
 			</Drawer.Header>
-			<ConnectWalletModalContent {additionalProps} {closeModal} {chain} {setStep} {step} />
+			<ConnectWalletModalContent
+				{walletConnect}
+				{additionalProps}
+				{closeModal}
+				{chain}
+				{setStep}
+				{step}
+				{chains}
+			/>
 		</Drawer.Content>
 	</Drawer.Root>
 {/if}

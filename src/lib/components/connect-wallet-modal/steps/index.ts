@@ -1,5 +1,6 @@
 import type { Chain } from 'thirdweb';
 import type { Account, Wallet } from 'thirdweb/wallets';
+import type { ConnectWalletModalProps } from '../index.js';
 
 export const connectWalletModalSteps = [
 	'provider-selector',
@@ -25,6 +26,8 @@ type ConnectWalletModalStepsAdditionalProps = {
 
 export type ConnectWalletModalStepProps<CurrentStep extends ConnectWalletModalStep> = {
 	chain: Chain | undefined;
+	chains?: Chain[];
+	walletConnect: ConnectWalletModalProps['walletConnect'];
 	onFinishConnect: (account: Account) => void;
 	setStep: <Step extends ConnectWalletModalStep>(
 		step: Step,

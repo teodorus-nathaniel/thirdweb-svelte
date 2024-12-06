@@ -12,6 +12,7 @@
 	export let wallet: Wallet;
 	export let chain: Chain | undefined = undefined;
 	export let onFinishConnect: (account: Account) => void;
+	export let chains: Chain[] | undefined = undefined;
 
 	const context = getThirdwebSvelteContext();
 
@@ -24,7 +25,8 @@
 			await wait(1000);
 			const account = await wallet.connect({
 				client: context.client,
-				chain
+				chain,
+				optionalChains: chains
 			});
 
 			onFinishConnect(account);

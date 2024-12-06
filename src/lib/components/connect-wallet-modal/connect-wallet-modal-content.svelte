@@ -11,12 +11,15 @@
 	import OauthError from './steps/oauth-error.svelte';
 	import { WalletConnect } from './steps/wallet-connect/index.js';
 	import Thirdweb from './components/thirdweb.svelte';
+	import type { ConnectWalletModalProps } from './index.js';
 
 	export let step: ConnectWalletModalStep;
 	export let setStep: ConnectWalletModalStepProps<'provider-selector'>['setStep'];
 	export let closeModal: () => void;
 	export let chain: Chain | undefined;
+	export let walletConnect: ConnectWalletModalProps['walletConnect'];
 	export let additionalProps: any;
+	export let chains: ConnectWalletModalProps['chains'];
 
 	const context = getThirdwebSvelteContext();
 
@@ -46,15 +49,43 @@
 >
 	<div class="twsv-flex twsv-flex-col" use:heightObserver>
 		{#if step === 'provider-selector'}
-			<ProviderSelector {setStep} {onFinishConnect} {chain} {additionalProps} />
+			<ProviderSelector
+				{chains}
+				{walletConnect}
+				{setStep}
+				{onFinishConnect}
+				{chain}
+				{additionalProps}
+			/>
 		{:else if step === 'wallet-selector'}
-			<WalletSelector {setStep} {onFinishConnect} {chain} {additionalProps} />
+			<WalletSelector
+				{chains}
+				{walletConnect}
+				{setStep}
+				{onFinishConnect}
+				{chain}
+				{additionalProps}
+			/>
 		{:else if step === 'oauth-loading'}
-			<OauthLoading {setStep} {onFinishConnect} {chain} {additionalProps} />
+			<OauthLoading
+				{chains}
+				{walletConnect}
+				{setStep}
+				{onFinishConnect}
+				{chain}
+				{additionalProps}
+			/>
 		{:else if step === 'oauth-error'}
-			<OauthError {setStep} {onFinishConnect} {chain} {additionalProps} />
+			<OauthError {chains} {walletConnect} {setStep} {onFinishConnect} {chain} {additionalProps} />
 		{:else if step === 'wallet-connect'}
-			<WalletConnect {setStep} {onFinishConnect} {chain} {additionalProps} />
+			<WalletConnect
+				{chains}
+				{walletConnect}
+				{setStep}
+				{onFinishConnect}
+				{chain}
+				{additionalProps}
+			/>
 		{/if}
 		{#if !hideFooter}
 			<Button
