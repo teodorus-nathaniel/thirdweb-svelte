@@ -7,6 +7,7 @@
 	import { isMobile } from '$/utils/platform.js';
 	import type { Chain } from 'thirdweb';
 	import type { Account } from 'thirdweb/wallets';
+	import DeepLinkConnect from './deep-link-connect.svelte';
 
 	type $$Props = ConnectWalletModalStepProps<'wallet-connect'>;
 	export let additionalProps: $$Props['additionalProps'];
@@ -34,7 +35,7 @@
 {:else}
 	{@const isInstalled = getInstalledWalletProviders().find((w) => w.info.rdns === wallet.id)}
 	{#if $walletInfoQuery.data.deepLink && !isInstalled && preferDeepLink && isMobile()}
-		<!-- TODO: DeepLinkConnectUI -->
+		<DeepLinkConnect deepLinkPrefix={$walletInfoQuery.data.deepLink.mobile} walletId={wallet.id} />
 	{:else if $walletInfoQuery.data.rdns && isInstalled}
 		<InjectedWalletConnect {onFinishConnect} {wallet} {chain} />
 	{:else if $walletInfoQuery.data.mobile.native && $walletInfoQuery.data.mobile.universal}
