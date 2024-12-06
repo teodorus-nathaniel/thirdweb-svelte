@@ -12,6 +12,7 @@
 	import { QrCode } from '../../components/qr-code/index.js';
 	import WalletImage from '../../components/wallet-image.svelte';
 	import Copy from 'lucide-svelte/icons/copy';
+	import Check from 'lucide-svelte/icons/check';
 
 	export let wallet: Wallet<WCSupportedWalletIds>;
 	export let walletInfo: WalletInfo;
@@ -24,44 +25,52 @@
 
 	let qrCodeUri = '';
 	let errorConnecting = false;
+	let linkCopied = false;
 
-	const connect = () => {
+	const connect = async () => {
 		errorConnecting = false;
 
-		wallet.connect({
-			chain,
-			client: context.client,
-			walletConnect: {
-				projectId: walletConnect?.projectId,
-				showQrModal: false,
-				onDisplayUri(uri) {
-					const preferNative = walletInfo.mobile.native || walletInfo.mobile.universal;
-					try {
-						if (isMobile()) {
-							if (isAndroid()) {
-								if (preferNative) {
-									openWindow(formatWalletConnectUrl(preferNative, uri).redirect);
-								}
-							} else if (isIOS()) {
-								if (preferNative) {
-									openWindow(formatWalletConnectUrl(preferNative, uri).redirect);
+		try {
+			const account = await wallet.connect({
+				chain,
+				client: context.client,
+				walletConnect: {
+					projectId: walletConnect?.projectId,
+					showQrModal: false,
+					onDisplayUri(uri) {
+						const preferNative = walletInfo.mobile.native || walletInfo.mobile.universal;
+						try {
+							if (isMobile()) {
+								if (isAndroid()) {
+									if (preferNative) {
+										openWindow(formatWalletConnectUrl(preferNative, uri).redirect);
+									}
+								} else if (isIOS()) {
+									if (preferNative) {
+										openWindow(formatWalletConnectUrl(preferNative, uri).redirect);
+									}
+								} else {
+									const preferUniversal = walletInfo.mobile.universal || walletInfo.mobile.native;
+									if (preferUniversal) {
+										openWindow(formatWalletConnectUrl(preferUniversal, uri).redirect);
+									}
 								}
 							} else {
-								const preferUniversal = walletInfo.mobile.universal || walletInfo.mobile.native;
-								if (preferUniversal) {
-									openWindow(formatWalletConnectUrl(preferUniversal, uri).redirect);
-								}
+								qrCodeUri = uri;
 							}
-						} else {
-							qrCodeUri = uri;
+						} catch {
+							errorConnecting = true;
 						}
-					} catch {
-						errorConnecting = true;
-					}
-				},
-				optionalChains: chains
-			}
-		});
+					},
+					optionalChains: chains
+				}
+			});
+
+			onFinishConnect(account);
+		} catch (err) {
+			console.error(err);
+			errorConnecting = true;
+		}
 	};
 
 	let scanStarted = false;
@@ -89,8 +98,23 @@
 			variant="link"
 			size="auto"
 			class="twsv-mx-auto twsv-mt-2 twsv-w-fit twsv-text-accent-foreground !twsv-no-underline hover:twsv-text-foreground focus:twsv-text-foreground"
+			on:click={async () => {
+				try {
+					await navigator.clipboard.writeText(qrCodeUri);
+					linkCopied = true;
+					setTimeout(() => {
+						linkCopied = false;
+					}, 3000);
+				} catch (err) {
+					console.error('Failed to copy link to clipboard', err);
+				}
+			}}
 		>
-			<Copy class="twsv-mr-1 twsv-h-3 twsv-w-3" />
+			{#if linkCopied}
+				<Check class="twsv-mr-1 twsv-h-3 twsv-w-3" />
+			{:else}
+				<Copy class="twsv-mr-1 twsv-h-3 twsv-w-3" />
+			{/if}
 			<span class="twsv-text-xs">Copy Link</span>
 		</Button>
 
