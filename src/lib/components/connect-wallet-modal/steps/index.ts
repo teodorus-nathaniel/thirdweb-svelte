@@ -28,6 +28,7 @@ export type ConnectWalletModalStepProps<CurrentStep extends ConnectWalletModalSt
 	chain: Chain | undefined;
 	chains?: Chain[];
 	walletConnect: ConnectWalletModalProps['walletConnect'];
+	setCustomBackClick: (backClick: (() => void) | null) => void;
 	onFinishConnect: (account: Account) => void;
 	setModalOpen: (open: boolean) => void;
 	setStep: <Step extends ConnectWalletModalStep>(

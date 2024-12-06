@@ -21,12 +21,14 @@
 	let step: ConnectWalletModalStep = 'provider-selector';
 	let additionalProps: any = undefined;
 	let customTitle = '';
+	let customBackClick: (() => void) | null = null;
 
 	const setStep = (
 		nextStep: ConnectWalletModalStep,
 		nextAdditionalProps: unknown = undefined,
 		nextCustomTitle?: string
 	) => {
+		customBackClick = null;
 		additionalProps = nextAdditionalProps;
 		step = nextStep;
 		if (nextCustomTitle) customTitle = nextCustomTitle;
@@ -34,6 +36,9 @@
 	};
 	const closeModal = () => {
 		open = false;
+	};
+	const setCustomBackClick = (backClick: (() => void) | null) => {
+		customBackClick = backClick;
 	};
 
 	$: showBackButton = step !== 'provider-selector';
@@ -60,7 +65,10 @@
 						variant="ghost"
 						size="auto"
 						class="twsv-absolute -twsv-left-2 twsv-top-0 twsv-text-muted-foreground"
-						on:click={() => setStep('provider-selector')}
+						on:click={() => {
+							if (customBackClick) customBackClick();
+							else setStep('provider-selector');
+						}}
 					>
 						<ChevronLeft />
 					</Button>
@@ -75,6 +83,8 @@
 				{setStep}
 				{step}
 				{chains}
+				{setCustomBackClick}
+				setModalOpen={(newOpen) => (open = newOpen)}
 			/>
 		</Dialog.Content>
 	</Dialog.Root>
@@ -107,6 +117,8 @@
 				{setStep}
 				{step}
 				{chains}
+				{setCustomBackClick}
+				setModalOpen={(newOpen) => (open = newOpen)}
 			/>
 		</Drawer.Content>
 	</Drawer.Root>

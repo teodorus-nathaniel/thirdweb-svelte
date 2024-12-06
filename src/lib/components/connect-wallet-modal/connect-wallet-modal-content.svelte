@@ -21,6 +21,7 @@
 	export let additionalProps: any;
 	export let chains: ConnectWalletModalProps['chains'];
 	export let setModalOpen: (open: boolean) => void;
+	export let setCustomBackClick: (backClick: (() => void) | null) => void;
 
 	const context = getThirdwebSvelteContext();
 
@@ -58,6 +59,7 @@
 				{chain}
 				{additionalProps}
 				{setModalOpen}
+				{setCustomBackClick}
 			/>
 		{:else if step === 'wallet-selector'}
 			<WalletSelector
@@ -68,6 +70,7 @@
 				{chain}
 				{additionalProps}
 				{setModalOpen}
+				{setCustomBackClick}
 			/>
 		{:else if step === 'oauth-loading'}
 			<OauthLoading
@@ -78,6 +81,7 @@
 				{chain}
 				{additionalProps}
 				{setModalOpen}
+				{setCustomBackClick}
 			/>
 		{:else if step === 'oauth-error'}
 			<OauthError
@@ -88,6 +92,7 @@
 				{chain}
 				{additionalProps}
 				{setModalOpen}
+				{setCustomBackClick}
 			/>
 		{:else if step === 'wallet-connect'}
 			<WalletConnect
@@ -98,6 +103,7 @@
 				{chain}
 				{additionalProps}
 				{setModalOpen}
+				{setCustomBackClick}
 			/>
 		{/if}
 		{#if !hideFooter}

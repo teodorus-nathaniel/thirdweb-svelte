@@ -9,7 +9,7 @@
 <div class="twsv-relative twsv-flex twsv-justify-center">
 	{#if qrCodeUri}
 		<div class="qr-code-container">
-			<QrCodeRenderer uri={qrCodeUri} size={size + 20} ecl="M" clearSize={$$slots.image ? 70 : 0} />
+			<QrCodeRenderer uri={qrCodeUri} size={size + 20} ecl="M" clearSize={$$slots.image ? 76 : 0} />
 		</div>
 	{:else}
 		<div style="--size:{size}px;" class="qr-code-placeholder">

@@ -11,6 +11,7 @@
 	import WalletconnectConnect from './walletconnect-connect.svelte';
 	import WalletconnectStandaloneConnect from './walletconnect-standalone-connect.svelte';
 	import WalletNotSupported from './wallet-not-supported.svelte';
+	import WalletGetStarted from '../wallet-get-started/wallet-get-started.svelte';
 
 	type $$Props = ConnectWalletModalStepProps<'wallet-connect'>;
 	export let additionalProps: $$Props['additionalProps'];
@@ -19,6 +20,7 @@
 	export let walletConnect: $$Props['walletConnect'];
 	export let chains: $$Props['chains'] = undefined;
 	export let setModalOpen: $$Props['setModalOpen'];
+	export let setCustomBackClick: $$Props['setCustomBackClick'];
 
 	$: wallet = additionalProps.wallet;
 	$: walletInfoQuery = getWalletInfoQuery(wallet.id);
@@ -69,6 +71,6 @@
 	{:else if wallet.id}
 		<InjectedWalletConnect {chains} {onFinishConnect} {wallet} {chain} />
 	{:else}
-		<!-- // if can't connect in any way - show get started screen -->
+		<WalletGetStarted {wallet} walletInfo={$walletInfoQuery.data} {setCustomBackClick} />
 	{/if}
 {/if}
