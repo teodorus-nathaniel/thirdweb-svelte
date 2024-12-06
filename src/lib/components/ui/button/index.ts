@@ -12,7 +12,7 @@ const buttonVariants = tv({
 			outline:
 				'twsv-border-input twsv-bg-background hover:twsv-border-accent-foreground hover:twsv-text-foreground twsv-border',
 			secondary: 'twsv-bg-secondary twsv-text-secondary-foreground hover:twsv-bg-secondary/80',
-			ghost: 'hover:twsv-bg-secondary hover:twsv-text-secondary-foreground',
+			ghost: 'hover:twsv-bg-secondary/50 hover:twsv-text-secondary-foreground',
 			link: 'twsv-text-primary twsv-underline-offset-4 hover:twsv-underline',
 			accent: 'twsv-bg-accent twsv-text-foreground hover:twsv-bg-accent/90'
 		},

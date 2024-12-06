@@ -66,7 +66,7 @@
 			{setModalOpen}
 		/>
 	{:else if wallet.id}
-		<!-- TODO: CoinbaseSDKWalletConnectUI -->
+		<InjectedWalletConnect {chains} {onFinishConnect} {wallet} {chain} />
 	{:else}
 		<!-- // if can't connect in any way - show get started screen -->
 	{/if}
