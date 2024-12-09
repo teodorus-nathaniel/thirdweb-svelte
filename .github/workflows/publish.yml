@@ -39,5 +39,5 @@ jobs:
         run: npm install
 
       - name: Publish
-        run: npm publish
+        run: npm publish --access public
         if: steps.check.outputs.changed == 'true'
